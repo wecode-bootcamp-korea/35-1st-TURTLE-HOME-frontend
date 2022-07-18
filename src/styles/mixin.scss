@@ -1,0 +1,5 @@
+@mixin flexContainer($alignItems, $justifyContent) {
+  display: flex;
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+}
