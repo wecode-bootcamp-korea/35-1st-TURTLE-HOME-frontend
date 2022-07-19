@@ -1,0 +1,136 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/variables.scss';
+
+@mixin sectionHeaderSpan {
+  margin-bottom: 20px;
+  font-weight: bolder;
+}
+
+@mixin loginButton {
+  width: 100%;
+  padding: 10px 0;
+  border: 1px solid black;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+@mixin loginButtonHover {
+  color: white;
+  background-color: black;
+}
+
+.display {
+  opacity: 0;
+}
+
+.login {
+  @include flexContainer(center, center);
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  .container {
+    @include flexContainer(flex-start, center);
+    padding: 20px;
+    background-color: white;
+    border: 1px solid black;
+
+    .section-left {
+      width: 50%;
+      height: 100%;
+
+      .login-header {
+        span {
+          display: block;
+          margin-bottom: 10px;
+        }
+        .left-section-header {
+          @include sectionHeaderSpan;
+        }
+      }
+
+      .login-main {
+        * {
+          display: block;
+        }
+        .forget-password {
+          margin-top: 20px;
+          color: rgba(0, 0, 0, 0.4);
+        }
+        button {
+          @include loginButton;
+        }
+        button:hover {
+          @include loginButtonHover;
+        }
+      }
+
+      .login-footer {
+        .hr-line {
+          display: flex;
+          flex-basis: 100%;
+          align-items: center;
+          color: rgba(0, 0, 0, 0.35);
+          font-size: 12px;
+          margin: 8px 0px;
+        }
+        .hr-line::before,
+        .hr-line::after {
+          content: '';
+          flex-grow: 1;
+          background: rgba(0, 0, 0, 0.35);
+          height: 1px;
+          font-size: 0px;
+          line-height: 0px;
+          margin: 0px 16px;
+        }
+        .login-icon {
+          @include flexContainer(center, center);
+          font-size: 45px;
+
+          i {
+            margin: 0 10px 5px 10px;
+            cursor: pointer;
+          }
+
+          .fa-facebook {
+            color: #1977f2;
+          }
+
+          .fa-apple {
+            color: black;
+            font-size: 50px;
+          }
+        }
+        .personal-agreement {
+          display: block;
+          text-align: center;
+          color: $var-gray;
+          font-size: 12px;
+          font-style: italic;
+        }
+      }
+    }
+    .section-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 50%;
+      height: 100%;
+
+      .right-section-header {
+        @include sectionHeaderSpan;
+        display: block;
+      }
+
+      button {
+        @include loginButton;
+      }
+      button:hover {
+        @include loginButtonHover;
+      }
+    }
+  }
+}
