@@ -1,9 +1,5 @@
 @import '../../styles/mixin.scss';
-
-a {
-  text-decoration: none;
-  color: black;
-}
+@import '../../styles/variables.scss';
 
 .header-wrapper {
   @include flexContainer(center, space-between);
@@ -26,9 +22,30 @@ a {
 
   .center-container {
     @include flexContainer(center, center);
+
+    .search-bar {
+      @include flexContainer(center, center);
+
+      span {
+        font-size: 18px;
+      }
+
+      .search-line {
+        width: 180px;
+        height: 18px;
+        margin-left: 2px;
+        border-bottom: 1px solid $var-black;
+      }
+    }
   }
 
   .right-container {
-    @include flexContainer(center, center);
+    @include flexContainer(center, space-between);
+    width: 130px;
+    font-size: 14px;
+
+    .text {
+      margin-right: 10px;
+    }
   }
 }

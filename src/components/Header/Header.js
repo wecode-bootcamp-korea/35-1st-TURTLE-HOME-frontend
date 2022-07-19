@@ -17,16 +17,16 @@ const Header = () => {
         <div className="center-container">
           <Link to="/" className="search-bar">
             <span>검색</span>
-            <span className="search-line"></span>
+            <div className="search-line"></div>
           </Link>
         </div>
         <div className="right-container">
           <Link to="/" className="login-link">
-            <span className="icon"></span>
+            <i icon="fa-thin fa-user" />
             <span className="text">로그인</span>
           </Link>
           <Link to="/" className="basket-link">
-            <span className="icon"></span>
+            <i icon="fa-thin fa-bag-shopping" />
             <span className="text">장바구니</span>
             <span>(</span>
             <span className="basket-count">0</span>
