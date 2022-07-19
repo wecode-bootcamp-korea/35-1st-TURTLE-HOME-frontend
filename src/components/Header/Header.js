@@ -10,7 +10,7 @@ import './Header.scss';
 
 const Header = () => {
   return (
-    <header className="header-container">
+    <header>
       <div className="header-wrapper">
         <div className="left-container">
           <FontAwesomeIcon icon={faBars} className="ham-menu" />
@@ -19,7 +19,7 @@ const Header = () => {
           </h1>
         </div>
         <div className="center-container">
-          <Link to="/" className="search-bar">
+          <Link to="/search" className="search-bar">
             <span>검색</span>
             <div className="search-line"></div>
           </Link>

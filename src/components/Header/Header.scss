@@ -7,7 +7,7 @@ a {
 
 .header-wrapper {
   @include flexContainer(center, space-between);
-  // position: fixed;
+  position: fixed;
   padding: 0 38px 0 20px;
   width: 100%;
   height: 100px;
@@ -15,6 +15,7 @@ a {
 
   .left-container {
     @include flexContainer(center, center);
+
     .ham-menu {
       font-size: 26px;
       margin-right: 25px;
@@ -28,8 +29,6 @@ a {
   }
 
   .center-container {
-    @include flexContainer(center, center);
-
     .search-bar {
       @include flexContainer(center, center);
 
