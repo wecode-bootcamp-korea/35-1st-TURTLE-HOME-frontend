@@ -1,24 +1,20 @@
 @import '../../styles/mixin.scss';
 @import '../../styles/variables.scss';
 
-a {
-  cursor: pointer;
-}
-
 .header-wrapper {
   @include flexContainer(center, space-between);
   position: fixed;
-  padding: 0 38px 0 20px;
   width: 100%;
   height: 100px;
+  padding: 10px 15px 0 20px;
   font-family: Arial, ZH-Sans, 'Lucida Sans Unicode', sans-serif, 'icomoon';
 
   .left-container {
     @include flexContainer(center, center);
 
     .ham-menu {
-      font-size: 26px;
       margin-right: 25px;
+      font-size: 26px;
       cursor: pointer;
     }
 
@@ -46,18 +42,21 @@ a {
   }
 
   .right-container {
-    @include flexContainer(center, space-between);
-    width: 170px;
-    font-size: 14px;
+    .page-link {
+      margin-right: 15px;
 
-    .login-link,
-    .basket-link {
       &:hover {
         opacity: 0.5;
       }
-    }
-    .text {
-      margin: 0 7px;
+
+      .icon {
+        font-size: 17px;
+      }
+
+      .text {
+        margin: 0 7px;
+        font-size: 13px;
+      }
     }
   }
 }

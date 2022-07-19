@@ -25,16 +25,13 @@ const Header = () => {
           </Link>
         </div>
         <div className="right-container">
-          <Link to="/" className="login-link">
-            <FontAwesomeIcon icon={faUser} />
+          <Link to="/" className="page-link">
+            <FontAwesomeIcon icon={faUser} className="icon" />
             <span className="text">로그인</span>
           </Link>
-          <Link to="/" className="basket-link">
-            <FontAwesomeIcon icon={faBagShopping} />
-            <span className="text">장바구니</span>
-            <span>(</span>
-            <span className="basket-count">0</span>
-            <span>)</span>
+          <Link to="/" className="page-link">
+            <FontAwesomeIcon icon={faBagShopping} className="icon" />
+            <span className="text">장바구니&nbsp;&nbsp;(0)</span>
           </Link>
         </div>
       </div>
