@@ -1,0 +1,34 @@
+@import '../../styles/mixin.scss';
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.header-wrapper {
+  @include flexContainer(center, space-between);
+  // position: fixed;
+  padding: 0 38px 0 20px;
+  width: 100%;
+  height: 100px;
+  font-family: Arial, ZH-Sans, 'Lucida Sans Unicode', sans-serif, 'icomoon';
+
+  .left-container {
+    @include flexContainer(center, center);
+    // .han-menu {
+    // }
+
+    h1 {
+      font-size: 35px;
+      letter-spacing: 10px;
+    }
+  }
+
+  .center-container {
+    @include flexContainer(center, center);
+  }
+
+  .right-container {
+    @include flexContainer(center, center);
+  }
+}
