@@ -1,6 +1,10 @@
 @import '../../styles/mixin.scss';
 @import '../../styles/variables.scss';
 
+a {
+  cursor: pointer;
+}
+
 .header-wrapper {
   @include flexContainer(center, space-between);
   // position: fixed;
@@ -11,11 +15,14 @@
 
   .left-container {
     @include flexContainer(center, center);
-    // .han-menu {
-    // }
+    .ham-menu {
+      font-size: 26px;
+      margin-right: 25px;
+      cursor: pointer;
+    }
 
     h1 {
-      font-size: 35px;
+      font-size: 32px;
       letter-spacing: 10px;
     }
   }
@@ -41,11 +48,17 @@
 
   .right-container {
     @include flexContainer(center, space-between);
-    width: 130px;
+    width: 170px;
     font-size: 14px;
 
+    .login-link,
+    .basket-link {
+      &:hover {
+        opacity: 0.5;
+      }
+    }
     .text {
-      margin-right: 10px;
+      margin: 0 7px;
     }
   }
 }
