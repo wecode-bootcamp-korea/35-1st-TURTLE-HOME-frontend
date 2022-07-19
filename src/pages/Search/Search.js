@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import ProductList from '../../components/ProductList/ProductList';
+import SearchBox from '../../components/SearchBox/SearchBox';
 import './Search.scss';
 
 const Search = () => {
+  const [searchInput, setSearchInput] = useState('');
+  const [products, setProducts] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]);
+
+  const handleChange = e => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const filtering = products.filter(product => {
+      return product.name.toUpperCase().includes(searchInput.toUpperCase());
+    });
+
+    setFilterProducts(filtering);
+  };
+
+  useEffect(() => {
+    fetch('/data/mock.json')
+      .then(res => res.json())
+      .then(data => setProducts(data));
+  }, []);
+
+  console.log(products);
+
   return (
     <main>
-      <section className="search-bar">
-        <form>
-          <input type="text" placeholder="무엇을 찾으세요?"></input>
-        </form>
-        <div className="x-box">
-          <img src="/images/x_thin.png" alt="Exit from the search page" />
-        </div>
-      </section>
-      <section className="products-list">
-        <div className="result">검색어를 입력해 주세요</div>
-      </section>
+      <SearchBox
+        handleSubmit={handleSubmit}
+        searchInput={searchInput}
+        handleChange={handleChange}
+      />
+      <ProductList products={filterProducts} />
     </main>
   );
 };

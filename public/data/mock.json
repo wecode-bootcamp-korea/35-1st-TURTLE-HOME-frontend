@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "침구",
+    "title": "accusamus beatae ad facilis cum similique qui sunt",
+    "url": "https://static.zarahome.net/8/photos4/2022/V/4/1/p/2622/900/999/2622900999_2_7_5.jpg?t=1639564576484&imformat=chrome",
+    "price": "10,000,000",
+    "alt": "amumal"
+  },
+  {
+    "id": 2,
+    "name": "베개",
+    "title": "accusamus beatae ad facilis cum similique qui sunt",
+    "url": "https://static.zarahome.net/8/photos4/2022/V/4/1/p/1639/091/305/1639091305_2_7_5.jpg?t=1645020546407&imformat=chrome",
+    "price": 10000000,
+    "alt": "amumal"
+  },
+  {
+    "id": 3,
+    "name": "커튼",
+    "title": "accusamus beatae ad facilis cum similique qui sunt",
+    "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/9821/032/052/9821032052_2_7_5.jpg?t=1658152148401&imformat=chrome",
+    "price": 10000000,
+    "alt": "amumal"
+  },
+  {
+    "id": 4,
+    "name": "커튼",
+    "title": "accusamus beatae ad facilis cum similique qui sunt",
+    "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/9821/032/052/9821032052_2_7_5.jpg?t=1658152148401&imformat=chrome",
+    "price": 10000000,
+    "alt": "amumal"
+  },
+  {
+    "id": 5,
+    "name": "커튼",
+    "title": "accusamus beatae ad facilis cum similique qui sunt",
+    "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/9821/032/052/9821032052_2_7_5.jpg?t=1658152148401&imformat=chrome",
+    "price": 10000000,
+    "alt": "amumal"
+  }
+]

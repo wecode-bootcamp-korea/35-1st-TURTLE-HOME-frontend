@@ -1,0 +1,18 @@
+@import '../../styles/mixin.scss';
+
+.product {
+  @include flexContainer(center, center);
+  flex-direction: column;
+  width: 25%;
+  padding-bottom: 30px;
+
+  .product-image {
+    img {
+      @include flexContainer(center, center);
+      width: 85%;
+    }
+  }
+
+  .product-info {
+  }
+}
