@@ -6,19 +6,22 @@
     transition: all 0.5s ease-in-out;
   }
 
+  .input-title-goup {
+    display: block;
+    transform: translateY(-20px);
+  }
+
   input {
+    // width: 470px;
     width: 100%;
     height: 30px;
     margin-top: 20px;
     border: none;
     border-bottom: 1px solid black;
-  }
-  input:focus {
-    outline: none;
-  }
 
-  .input-title-goup {
-    transform: scale(0.8) translate(-40px, -30px);
+    &:focus {
+      outline: none;
+    }
   }
 
   .input-red {

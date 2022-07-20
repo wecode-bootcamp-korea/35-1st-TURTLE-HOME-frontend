@@ -1,40 +1,33 @@
 import { useState } from 'react';
 import './UserInput.scss';
 
-const UserInput = ({ name, koreanName, condition, loginInputHandler }) => {
-  const [loginValidationBtn, setLoginValidationBtn] = useState(false);
-
-  const validationChecker = condition => {
-    if (condition) {
-      setLoginValidationBtn(true);
-    } else {
-      setLoginValidationBtn(false);
-    }
-  };
-
+const UserInput = ({
+  name,
+  koreanName,
+  condition,
+  inputValue,
+  loginInputHandler,
+}) => {
   const [inputTitleRedBtn, setInputTitleRedBtn] = useState(false);
   const [inputTitleGoUpBtn, setInputTitleGoUpBtn] = useState(false);
 
-  const inputFocusEffector = e => {
-    setInputTitleGoUpBtn(true);
-  };
-
-  const inputBlurEffector = e => {
-    e.target.value ? setInputTitleGoUpBtn(true) : setInputTitleGoUpBtn(false);
+  const inputGoUpEffector = () => {
+    if (inputValue.length > 0) return;
+    else {
+      setInputTitleGoUpBtn(prev => !prev);
+    }
   };
 
   const inputRedEffector = () => {
-    loginValidationBtn ? setInputTitleRedBtn(false) : setInputTitleRedBtn(true);
+    condition ? setInputTitleRedBtn(false) : setInputTitleRedBtn(true);
   };
   return (
     <>
       <div className="user-input">
         <span
-          className={
-            'user-placeholder ' +
-            (inputTitleGoUpBtn ? 'input-title-goup' : null)
-          }
-          style={inputTitleRedBtn ? { color: 'red' } : { color: 'gray' }}
+          className={`user-placeholder 
+            ${inputTitleGoUpBtn ? 'input-title-goup' : null}
+           ${!condition ? 'input-red' : 'input-gray'}`}
         >
           {koreanName} *
         </span>
@@ -43,16 +36,15 @@ const UserInput = ({ name, koreanName, condition, loginInputHandler }) => {
           name={name}
           className={inputTitleRedBtn ? 'input-border-red' : null}
           onFocus={e => {
-            inputFocusEffector(e);
+            inputGoUpEffector();
             inputRedEffector();
           }}
           onBlur={e => {
-            inputBlurEffector(e);
+            inputGoUpEffector();
             inputRedEffector();
           }}
           onChange={e => {
             loginInputHandler(e);
-            validationChecker({ condition });
           }}
         ></input>
       </div>

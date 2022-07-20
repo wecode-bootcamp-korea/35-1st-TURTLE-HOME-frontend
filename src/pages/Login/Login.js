@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Login.scss';
 import UserInput from '../../components/UserInput/UserInput';
 
@@ -13,7 +13,7 @@ const Login = () => {
   };
   const { email, password } = loginInput;
 
-  const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+  const emailRegex = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
   const emailCondition = emailRegex.test(email);
   const pwdCondition = password.length > 4;
 
@@ -31,17 +31,36 @@ const Login = () => {
               and we’ll tell you how to find it.
             </span>
           </div>
-          <form className="login-main">
+          <form
+            className="login-main"
+            onSubmit={() => {
+              fetch('/', {
+                method: 'POST',
+                body: JSON.stringify({
+                  email,
+                  password,
+                }),
+              })
+                .then(res => {
+                  res.json();
+                })
+                .then(result => {
+                  console.log('결과:', result);
+                });
+            }}
+          >
             <UserInput
               name="email"
               koreanName="이메일"
               condition={emailCondition}
+              inputValue={email}
               loginInputHandler={loginInputHandler}
             />
             <UserInput
               name="password"
               koreanName="비밀번호"
               condition={pwdCondition}
+              inputValue={password}
               loginInputHandler={loginInputHandler}
             />
             <span className="forget-password">비밀번호를 잊으셨습니까?</span>

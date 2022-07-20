@@ -4,6 +4,7 @@
 @mixin sectionHeaderSpan {
   margin-bottom: 20px;
   font-weight: bolder;
+  color: $var-black;
 }
 
 @mixin loginButton {
@@ -26,24 +27,27 @@
 
 .login {
   @include flexContainer(center, center);
-  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
 
   .container {
     @include flexContainer(flex-start, center);
-    padding: 20px;
+    width: 60%;
+    padding: 30px;
     background-color: white;
-    border: 1px solid black;
 
     .section-left {
       width: 50%;
       height: 100%;
+      margin-right: 30px;
 
       .login-header {
         span {
           display: block;
           margin-bottom: 10px;
+          color: $var-gray;
         }
         .left-section-header {
           @include sectionHeaderSpan;
@@ -51,18 +55,19 @@
       }
 
       .login-main {
-        * {
-          display: block;
-        }
         .forget-password {
+          display: block;
           margin-top: 20px;
+          margin-bottom: 5px;
           color: rgba(0, 0, 0, 0.4);
         }
         button {
           @include loginButton;
-        }
-        button:hover {
-          @include loginButtonHover;
+          margin-bottom: 10px;
+
+          &:hover {
+            @include loginButtonHover;
+          }
         }
       }
 
@@ -71,19 +76,19 @@
           display: flex;
           flex-basis: 100%;
           align-items: center;
+          margin: 8px 0px;
           color: rgba(0, 0, 0, 0.35);
           font-size: 12px;
-          margin: 8px 0px;
         }
         .hr-line::before,
         .hr-line::after {
-          content: '';
           flex-grow: 1;
-          background: rgba(0, 0, 0, 0.35);
           height: 1px;
+          margin: 0px 16px;
+          background: rgba(0, 0, 0, 0.35);
           font-size: 0px;
           line-height: 0px;
-          margin: 0px 16px;
+          content: '';
         }
         .login-icon {
           @include flexContainer(center, center);
@@ -117,7 +122,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
-      width: 50%;
+      width: 48%;
       height: 100%;
 
       .right-section-header {
@@ -127,10 +132,17 @@
 
       button {
         @include loginButton;
+
+        &:hover {
+          @include loginButtonHover;
+        }
       }
-      button:hover {
-        @include loginButtonHover;
-      }
+    }
+
+    .fa-x {
+      padding-left: 20px;
+      font-size: 15px;
+      cursor: pointer;
     }
   }
 }
