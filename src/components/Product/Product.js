@@ -1,18 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Product.scss';
 
-const Product = ({ url, alt, title, price }) => {
+const Product = ({ url, alt, name, price }) => {
   return (
-    <article className="product">
-      <div className="product-image">
+    <li className="product">
+      <Link to="/">
         <img src={url} alt={alt} />
-      </div>
-      <div className="product-info">
-        <h2>{title}</h2>
-        <p>{price}</p>
-      </div>
-      {/* <div className="result">검색어를 입력해 주세요</div> */}
-    </article>
+        <div className="product-info">
+          <h2>{name}</h2>
+          <p>{price.toLocaleString('ko-KR')}원</p>
+        </div>
+      </Link>
+    </li>
   );
 };
 

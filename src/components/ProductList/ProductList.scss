@@ -4,10 +4,5 @@
   @include flexContainer(center, flex-start);
   flex-wrap: wrap;
   width: 100%;
-  margin: 40px 40px 0 40px;
-
-  .result {
-    text-align: center;
-    font-size: 15px;
-  }
+  padding: 40px;
 }

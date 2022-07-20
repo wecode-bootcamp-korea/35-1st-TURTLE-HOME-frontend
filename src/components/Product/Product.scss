@@ -4,15 +4,25 @@
   @include flexContainer(center, center);
   flex-direction: column;
   width: 25%;
-  padding-bottom: 30px;
+  margin-bottom: 100px;
 
-  .product-image {
-    img {
-      @include flexContainer(center, center);
-      width: 85%;
-    }
+  img {
+    width: 98%;
   }
 
   .product-info {
+    @include flexContainer(flex-start, flex-start);
+    flex-direction: column;
+    width: 100%;
+    font-size: 15px;
+
+    h2 {
+      width: 100%;
+      padding: 13px 0;
+    }
+
+    p {
+      width: 100%;
+    }
   }
 }

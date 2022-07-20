@@ -4,11 +4,12 @@ import './ProductList.scss';
 
 const ProductList = ({ products }) => {
   return (
-    <section className="product-list">
-      {products.map(({ id, url, alt, title, price }) => (
-        <Product key={id} url={url} alt={alt} title={title} price={price} />
-      ))}
-      {/* <div className="result">검색어를 입력해 주세요</div> */}
+    <section>
+      <ul className="product-list">
+        {products.map(({ id, url, alt, name, price }) => (
+          <Product key={id} url={url} alt={alt} name={name} price={price} />
+        ))}
+      </ul>
     </section>
   );
 };
