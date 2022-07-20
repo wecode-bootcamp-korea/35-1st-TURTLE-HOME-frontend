@@ -11,7 +11,7 @@ const UserInput = ({
   const [inputTitleGoUpBtn, setInputTitleGoUpBtn] = useState(false);
 
   const inputGoUpEffector = () => {
-    if (inputValue.length > 0) return;
+    if (inputValue) return;
     else {
       setInputTitleGoUpBtn(prev => !prev);
     }
@@ -23,22 +23,16 @@ const UserInput = ({
         <span
           className={`user-placeholder 
             ${inputTitleGoUpBtn ? 'input-title-goup' : null}
-           ${!condition && inputValue.length > 0 ? 'input-red' : 'input-gray'}`}
+           ${!condition && inputValue ? 'input-red' : 'input-gray'}`}
         >
           {koreanName} *
         </span>
         <input
           type={name}
           name={name}
-          className={
-            !condition && inputValue.length > 0 ? 'input-border-red' : null
-          }
-          onFocus={e => {
-            inputGoUpEffector();
-          }}
-          onBlur={e => {
-            inputGoUpEffector();
-          }}
+          className={!condition && inputValue ? 'input-border-red' : null}
+          onFocus={inputGoUpEffector}
+          onBlur={inputGoUpEffector}
           onChange={e => {
             loginInputHandler(e);
           }}
@@ -50,7 +44,7 @@ const UserInput = ({
           (!condition && inputValue.length > 0 ? null : 'display')
         }
       >
-        이 필드는 필수 항목입니다.
+        형식에 맞지 않습니다.
       </span>
     </>
   );
