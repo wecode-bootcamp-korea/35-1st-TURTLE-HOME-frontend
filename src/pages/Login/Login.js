@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import './Login.scss';
 import UserInput from '../../components/UserInput/UserInput';
+import './Login.scss';
 
 const Login = () => {
   const [loginInput, setLoginInput] = useState({
@@ -17,6 +17,22 @@ const Login = () => {
   const emailCondition = emailRegex.test(email);
   const pwdCondition = password.length > 4;
 
+  const loginFetch = () => {
+    fetch('/', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then(res => {
+        res.json();
+      })
+      .then(result => {
+        console.log('결과:', result);
+      });
+  };
+
   return (
     <div className="login">
       <div className="container">
@@ -31,24 +47,7 @@ const Login = () => {
               and we’ll tell you how to find it.
             </span>
           </div>
-          <form
-            className="login-main"
-            onSubmit={() => {
-              fetch('/', {
-                method: 'POST',
-                body: JSON.stringify({
-                  email,
-                  password,
-                }),
-              })
-                .then(res => {
-                  res.json();
-                })
-                .then(result => {
-                  console.log('결과:', result);
-                });
-            }}
-          >
+          <form className="login-main" onSubmit={loginFetch()}>
             <UserInput
               name="email"
               koreanName="이메일"
