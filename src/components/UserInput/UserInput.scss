@@ -1,0 +1,43 @@
+.user-input {
+  .user-placeholder {
+    position: relative;
+    top: 40px;
+    pointer-events: none;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .input-title-goup {
+    display: block;
+    transform: translateY(-20px);
+  }
+
+  input {
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+    border: none;
+    border-bottom: 1px solid black;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .input-red {
+    color: red;
+  }
+
+  .input-gray {
+    color: gray;
+  }
+
+  .input-border-red {
+    border-bottom: 1px solid red;
+  }
+}
+
+.login-validation {
+  margin-top: 5px;
+  color: red;
+  font-size: 11px;
+}
