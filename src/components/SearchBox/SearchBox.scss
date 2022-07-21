@@ -15,14 +15,14 @@
       width: 100%;
       padding-left: 8px;
       border: none;
+      color: $var-black;
       font-weight: 600;
       font-size: 24px;
-      color: $var-black;
 
       &::placeholder {
-        font-weight: 100;
-        font-size: 24px;
         color: #dddddd;
+        font-size: 24px;
+        font-weight: 100;
       }
       &:focus {
         outline: none;
