@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserInput from '../../components/UserInput/UserInput';
 import './Login.scss';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [loginInput, setLoginInput] = useState({
     email: '',
     password: '',
@@ -19,19 +21,19 @@ const Login = () => {
 
   const loginFetch = e => {
     e.preventDefault();
-    fetch('?', {
+    fetch('http://10.58.2.101:8000/users/signin', {
       method: 'POST',
       body: JSON.stringify({
-        email,
-        password,
+        email: email,
+        password: password,
       }),
     })
-      .then(res => {
-        res.json();
-      })
-      .then(result => {
-        console.log('결과:', result);
-      });
+      .then(res => res.json())
+      .then(data => console.log(data.access_token));
+  };
+
+  const gotoSignup = () => {
+    navigate('/signup');
   };
 
   return (
@@ -79,7 +81,9 @@ const Login = () => {
         </div>
         <div className="section-right">
           <span className="right-section-header">회원 가입</span>
-          <button className="login-signin">계정 만들기</button>
+          <button className="login-signin" onClick={gotoSignup}>
+            계정 만들기
+          </button>
         </div>
         <i class="fa-solid fa-x"></i>
       </div>

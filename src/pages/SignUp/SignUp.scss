@@ -24,9 +24,11 @@
         justify-content: space-between;
         margin-bottom: 20px;
         color: $var-black;
-      }
 
-      span {
+        .fa-angle-left {
+          cursor: pointer;
+        }
+
         .section-header {
           margin-bottom: 20px;
           color: $var-black;
@@ -34,10 +36,21 @@
         }
       }
 
+      .sign-checkbox {
+        .checkbox-input {
+          margin: 25px 0;
+
+          a {
+            color: gray;
+          }
+        }
+      }
+
       .sign-main {
         button {
           width: 100%;
           padding: 10px 0;
+          margin: 10px 0;
           border: 1px solid black;
           background-color: white;
           transition: all 0.2s ease-in-out;
@@ -46,16 +59,6 @@
           &:hover {
             color: white;
             background-color: black;
-          }
-        }
-
-        .sign-checkbox {
-          .checkbox-input {
-            margin: 25px 0;
-
-            a {
-              color: gray;
-            }
           }
         }
       }

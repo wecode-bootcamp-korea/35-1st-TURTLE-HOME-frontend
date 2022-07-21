@@ -1,49 +1,50 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserInput from '../../components/UserInput/UserInput';
 import './SignUp.scss';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [signInput, setSignInput] = useState({
-    fullname: '',
+    korean_name: '',
     email: '',
     password: '',
-    phoneNumber: '',
     address: '',
+    phone_number: '',
   });
   const signInputHandler = e => {
     const { name, value } = e.target;
     setSignInput({ ...signInput, [name]: value });
   };
-  const { fullname, email, password, phoneNumber, address } = signInput;
+  const { korean_name, email, password, phone_number, address } = signInput;
 
   const emailRegex = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
   const pwdRegex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
   const phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-  const nameCondition = fullname.length > 1;
+  const nameCondition = korean_name.length > 1;
   const emailCondition = emailRegex.test(email);
   const pwdCondition = pwdRegex.test(password);
-  const phoneCondition = phoneRegex.test(phoneNumber);
+  const phoneCondition = phoneRegex.test(phone_number);
   const addressCondition = address.length > 3;
 
   const signFetch = e => {
     e.preventDefault();
-    fetch('/', {
+    fetch('http://10.58.2.101:8000/users/signup', {
       method: 'POST',
       body: JSON.stringify({
-        fullname,
+        korean_name,
         email,
         password,
-        phoneNumber,
         address,
+        phone_number,
       }),
     })
-      .then(res => {
-        res.json();
-      })
-      .then(result => {
-        console.log('결과:', result);
-      });
+      .then(res => res.json())
+      .then(result => console.log('결과:', result));
+  };
+  const goBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -51,17 +52,17 @@ const SignUp = () => {
       <div className="container">
         <div className="section">
           <div className="sign-header">
-            <i class="fa-solid fa-angle-left"></i>
+            <i class="fa-solid fa-angle-left" onClick={goBack}></i>
             <span className="section-header">자라홈 계정 만들기</span>
             <span> </span>
           </div>
 
           <form className="sign-main" onSubmit={signFetch}>
             <UserInput
-              name="fullname"
+              name="korean_name"
               koreanName="이름"
               condition={nameCondition}
-              inputValue={fullname}
+              inputValue={korean_name}
               loginInputHandler={signInputHandler}
             />
             <UserInput
@@ -79,10 +80,10 @@ const SignUp = () => {
               loginInputHandler={signInputHandler}
             />
             <UserInput
-              name="phoneNumber"
+              name="phone_number"
               koreanName="핸드폰번호"
               condition={phoneCondition}
-              inputValue={phoneNumber}
+              inputValue={phone_number}
               loginInputHandler={signInputHandler}
             />
             <UserInput
@@ -94,7 +95,6 @@ const SignUp = () => {
             />
 
             <div className="sign-checkbox">
-              <InputCheck content="모두동의" />
               <InputCheck
                 content="개인정보의 수집 및 이용에 대한 동의."
                 dataLink="https://static.zarahome.net/8/staticContent4/PDF/PP/KR/personal-information-privacy-policy-ko.pdf?20220720022012"
