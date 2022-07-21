@@ -17,8 +17,9 @@ const Login = () => {
   const emailCondition = emailRegex.test(email);
   const pwdCondition = password.length > 4;
 
-  const loginFetch = () => {
-    fetch('/', {
+  const loginFetch = e => {
+    e.preventDefault();
+    fetch('?', {
       method: 'POST',
       body: JSON.stringify({
         email,
@@ -47,7 +48,7 @@ const Login = () => {
               and we’ll tell you how to find it.
             </span>
           </div>
-          <form className="login-main" onSubmit={loginFetch()}>
+          <form className="login-main" onSubmit={loginFetch}>
             <UserInput
               name="email"
               koreanName="이메일"
