@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserInput from '../../components/UserInput/UserInput';
 import './Login.scss';
 
 const Login = () => {
-  const navigate = useNavigate();
   const [loginInput, setLoginInput] = useState({
     email: '',
     password: '',
@@ -30,10 +29,6 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(data => console.log(data.access_token));
-  };
-
-  const gotoSignup = () => {
-    navigate('/signup');
   };
 
   return (
@@ -81,9 +76,9 @@ const Login = () => {
         </div>
         <div className="section-right">
           <span className="right-section-header">회원 가입</span>
-          <button className="login-signin" onClick={gotoSignup}>
-            계정 만들기
-          </button>
+          <Link to="/signup" className="login-signin-link">
+            <button className="login-signin">계정 만들기</button>
+          </Link>
         </div>
         <i class="fa-solid fa-x"></i>
       </div>
