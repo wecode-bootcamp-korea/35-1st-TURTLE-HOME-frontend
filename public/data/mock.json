@@ -3,56 +3,56 @@
     "id": 1,
     "name": "(40S) 퍼케일 코튼 매트리스 커버",
     "url": "https://static.zarahome.net/8/photos4/2022/V/4/1/p/2622/900/999/2622900999_2_7_5.jpg?t=1639564576484&imformat=chrome",
-    "price": 10000000,
+    "price": [10000, 20000, 30000],
     "alt": "amumal"
   },
   {
     "id": 2,
     "name": "페이즐리 프린트 베개 커버",
     "url": "https://static.zarahome.net/8/photos4/2022/V/4/1/p/1639/091/305/1639091305_2_7_5.jpg?t=1645020546407&imformat=chrome",
-    "price": 20,
+    "price": [40000, 50000, 60000],
     "alt": "amumal"
   },
   {
     "id": 3,
     "name": "린넨 샤워 커튼",
     "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/3329/032/052/3329032052_2_7_5.jpg?t=1646911384498&imformat=chrome",
-    "price": 300000,
+    "price": [300000, 100000000],
     "alt": "amumal"
   },
   {
     "id": 4,
     "name": "탭 탑 커튼",
     "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/9821/032/052/9821032052_2_7_5.jpg?t=1658152148401&imformat=chrome",
-    "price": 10000000,
+    "price": [10000000],
     "alt": "amumal"
   },
   {
     "id": 5,
     "name": "하이 GSM 린넨 커튼",
     "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/9372/032/710/9372032710_2_7_5.jpg?t=1654778349785&imformat=chrome",
-    "price": 10000000,
+    "price": [1000, 10000000],
     "alt": "amumal"
   },
   {
     "id": 6,
     "name": "화이트 린넨 커튼",
     "url": "https://static.zarahome.net/8/photos4/2022/V/4/1/p/4640/032/811/4640032811_2_7_5.jpg?t=1648475467380&imformat=chrome",
-    "price": 10000000,
+    "price": [10000000],
     "alt": "amumal"
   },
   {
     "id": 7,
     "name": "멀티컬러 스트라이프 커튼",
     "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/8630/032/999/8630032999_2_7_5.jpg?t=1655467010502&imformat=chrome",
-    "price": 10000000,
+    "price": [335740, 10000000],
     "alt": "amumal"
   },
   {
     "id": 8,
     "name": "린넨 디테일 문 & 스타 베개 커버",
     "url": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/1639/091/920/1639091920_2_7_5.jpg?t=1651149525952&imformat=chrome",
-    "price": 10000000,
+    "price": [20000000],
     "alt": "amumal"
   }
 ]

@@ -1,17 +1,15 @@
 @import '../../styles/mixin.scss';
 
-.product {
-  @include flexContainer(center, center);
-  flex-direction: column;
-  width: 25%;
+.search-product-item {
   margin-bottom: 100px;
 
-  img {
-    width: 98%;
+  .product-img {
+    img {
+      width: 100%;
+    }
   }
-
   .product-info {
-    @include flexContainer(flex-start, flex-start);
+    @include flexContainer(flex-start, center);
     flex-direction: column;
     width: 100%;
     font-size: 15px;
@@ -19,10 +17,7 @@
     h2 {
       width: 100%;
       padding: 13px 0;
-    }
-
-    p {
-      width: 100%;
+      font-size: large;
     }
   }
 }
