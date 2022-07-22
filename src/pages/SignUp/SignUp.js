@@ -6,35 +6,37 @@ import CHECKBOX_DATA from './data/checkboxData';
 import './SignUp.scss';
 
 const SignUp = () => {
-  const [signInput, setSignInput] = useState({
+  const [signUpInput, setSignUpInput] = useState({
     korean_name: '',
     email: '',
     password: '',
     address: '',
     phone_number: '',
   });
-  const signInputHandler = e => {
+  const signUpInputHandler = e => {
     const { name, value } = e.target;
-    setSignInput({ ...signInput, [name]: value });
+    setSignUpInput({ ...signUpInput, [name]: value });
   };
-  const { korean_name, email, password, phone_number, address } = signInput;
+  const { korean_name, email, password, phone_number, address } = signUpInput;
 
   const emailRegex = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
   const pwdRegex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
   const phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-  const nameCondition = korean_name.length > 1;
-  const emailCondition = emailRegex.test(email);
-  const pwdCondition = pwdRegex.test(password);
-  const phoneCondition = phoneRegex.test(phone_number);
-  const addressCondition = address.length > 3;
+  const signConditions = {
+    nameCondition: korean_name.length > 1,
+    emailCondition: emailRegex.test(email),
+    pwdCondition: pwdRegex.test(password),
+    phoneCondition: phoneRegex.test(phone_number),
+    addressCondition: address.length > 3,
+  };
 
   const signFetch = e => {
     e.preventDefault();
     fetch('http://10.58.2.101:8000/users/signup', {
       method: 'POST',
       body: JSON.stringify({
-        signInput,
+        signUpInput,
       }),
     })
       .then(res => res.json())
@@ -60,9 +62,9 @@ const SignUp = () => {
                   key={i}
                   name={element.name}
                   koreanName={element.koreanName}
-                  condition={`${'nameCondition'}`}
-                  inputValue={signInput[`${element.name}`]}
-                  loginInputHandler={signInputHandler}
+                  condition={signConditions[`${element.condition}`]}
+                  inputValue={signUpInput[`${element.name}`]}
+                  loginInputHandler={signUpInputHandler}
                 />
               );
             })}
