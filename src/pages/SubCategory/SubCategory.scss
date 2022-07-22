@@ -1,0 +1,18 @@
+@import '../../styles/mixin.scss';
+
+.products {
+  padding-top: 130px;
+
+  .product-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 65px 30px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .product-items {
+    grid-template-columns: 1fr;
+  }
+}
