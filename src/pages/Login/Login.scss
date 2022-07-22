@@ -131,7 +131,11 @@
         display: block;
       }
 
-      button {
+      .login-signin-link {
+        width: 100%;
+      }
+
+      .login-signin {
         @include loginButton;
 
         &:hover {

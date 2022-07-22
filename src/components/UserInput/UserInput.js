@@ -20,6 +20,8 @@ const UserInput = ({
   return (
     <>
       <div className="user-input">
+        {console.log(condition)}
+
         <span
           className={`user-placeholder 
             ${inputTitleGoUpBtn ? 'input-title-goup' : null}
