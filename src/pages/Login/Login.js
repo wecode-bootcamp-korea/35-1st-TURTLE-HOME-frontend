@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import UserInput from '../../components/UserInput/UserInput';
 import './Login.scss';
 
@@ -19,19 +20,15 @@ const Login = () => {
 
   const loginFetch = e => {
     e.preventDefault();
-    fetch('?', {
+    fetch('http://10.58.2.101:8000/users/signin', {
       method: 'POST',
       body: JSON.stringify({
-        email,
-        password,
+        email: email,
+        password: password,
       }),
     })
-      .then(res => {
-        res.json();
-      })
-      .then(result => {
-        console.log('결과:', result);
-      });
+      .then(res => res.json())
+      .then(data => console.log(data.access_token));
   };
 
   return (
@@ -79,7 +76,9 @@ const Login = () => {
         </div>
         <div className="section-right">
           <span className="right-section-header">회원 가입</span>
-          <button className="login-signin">계정 만들기</button>
+          <Link to="/signup" className="login-signin-link">
+            <button className="login-signin">계정 만들기</button>
+          </Link>
         </div>
         <i class="fa-solid fa-x"></i>
       </div>
