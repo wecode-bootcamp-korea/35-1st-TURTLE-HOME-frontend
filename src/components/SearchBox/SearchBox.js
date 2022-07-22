@@ -13,7 +13,7 @@ function SearchBox({ handleSubmit, searchInput, handleChange }) {
           onChange={handleChange}
         ></input>
       </form>
-      <Link to="/" className="x-box">
+      <Link to="/" className="close-box">
         <img src="/images/x_thin.png" alt="Exit from the search page" />
       </Link>
     </section>
