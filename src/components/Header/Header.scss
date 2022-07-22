@@ -2,6 +2,7 @@
 @import '../../styles/variables.scss';
 
 .header-wrapper {
+  z-index: 100;
   @include flexContainer(center, space-between);
   position: fixed;
   width: 100%;
