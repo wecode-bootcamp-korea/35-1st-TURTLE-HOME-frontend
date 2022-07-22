@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductItem from '../../components/ProductItem/ProductItem';
+import ProductList from '../../components/ProductList/ProductList';
 import './SubCategory.scss';
 
 const SubCategory = () => {
@@ -16,7 +16,7 @@ const SubCategory = () => {
     <section className="products">
       <ul className="product-items">
         {products.map(({ id, url, alt, name, price }) => (
-          <ProductItem key={id} url={url} alt={alt} name={name} price={price} />
+          <ProductList key={id} url={url} alt={alt} name={name} price={price} />
         ))}
       </ul>
     </section>
