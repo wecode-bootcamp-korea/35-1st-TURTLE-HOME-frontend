@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import IntroColumn from './IntroColumn';
 import './Intro.scss';
 
@@ -25,22 +25,25 @@ const Intro = () => {
     }
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      slideValue === -200
-        ? setSlideValue(0)
-        : setSlideValue(prev => prev - 100);
-    }, 3000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [slideValue]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     slideValue === -200
+  //       ? setSlideValue(0)
+  //       : setSlideValue(prev => prev - 100);
+  //   }, 3000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [slideValue]);
 
   return (
     <div className="intro">
       <div className="slide-wrap">
         <div className="slide-items" style={{ left: copy }}>
-          <IntroColumn />
+          {IMAGES.map(({ id, src, alt, content }) => (
+            <IntroColumn key={id} src={src} alt={alt} content={content} />
+          ))}
+          ;
         </div>
         <div className="btn-box">
           <div className="prev" onClick={prev} />
@@ -54,7 +57,21 @@ const Intro = () => {
 export default Intro;
 
 const IMAGES = [
-  { id: 1, src: '/images/bedroom.jpeg', alt: '첫 번째 이미지' },
-  { id: 2, src: '/images/bed.jpeg', alt: '두 번째 이미지' },
-  { id: 3, src: '/images/cat.jpeg', alt: '세 번째 이미지' },
+  {
+    id: 1,
+    src: '/images/slide1.jpg',
+    alt: '첫 번째 이미지',
+    content: 'SUMMER COMES TO TURULE HOME',
+  },
+  {
+    id: 2,
+    src: '/images/slide2.jpg',
+    alt: '두 번째 이미지',
+    content: 'COZY BEDDING',
+  },
+  {
+    id: 3,
+    src: '/images/slide3.jpg',
+    alt: '세 번째 이미지',
+  },
 ];
