@@ -11,9 +11,13 @@ const Router = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Rougte path="/" element={<Intro />} />
+<<<<<<< HEAD
+        <Route path="/intro" element={<Intro />} />
+=======
+        <Route path="/" element={<Intro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+>>>>>>> master
       </Routes>
       <Footer />
     </BrowserRouter>
