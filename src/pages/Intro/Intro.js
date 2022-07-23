@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import IntroColumn from './IntroColumn';
 import './Intro.scss';
 
@@ -16,6 +16,7 @@ const Intro = () => {
       //슬라이드의 width 값은 300인데 보여지는 슬라이드 값은 100이므로 +100씩 (200, 300) 추가가 되어 다음 이미지가 보여진다.
     }
   };
+
   const next = () => {
     let slideChild = IMAGES.length;
     if (slide < slideChild - 1) {
@@ -25,16 +26,16 @@ const Intro = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     slideValue === -200
-  //       ? setSlideValue(0)
-  //       : setSlideValue(prev => prev - 100);
-  //   }, 3000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [slideValue]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      slideValue === -200
+        ? setSlideValue(0)
+        : setSlideValue(prev => prev - 100);
+    }, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [slideValue]);
 
   return (
     <div className="intro">
@@ -67,7 +68,7 @@ const IMAGES = [
     id: 2,
     src: '/images/slide2.jpg',
     alt: '두 번째 이미지',
-    content: 'COZY BEDDING',
+    // content: 'COZY BEDDING',
   },
   {
     id: 3,
