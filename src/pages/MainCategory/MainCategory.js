@@ -13,14 +13,12 @@ const MainCategory = () => {
       });
   }, []);
 
-  // const cate = category.result;
-
   return (
     <div className="category_box">
       {console.log(category)}
       {category.map(list => (
         <div className="category_list" key={list.id}>
-          <img src={list.image_url} />
+          <img src={list.image_url} alt="category list" />
           <p>{list.name}</p>
         </div>
       ))}
