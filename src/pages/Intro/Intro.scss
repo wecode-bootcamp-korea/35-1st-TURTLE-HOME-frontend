@@ -11,7 +11,6 @@
       left: 0;
       top: 0;
       display: flex;
-      // height: 100%;
       width: 300vw;
       transition: all 0.8s ease-in-out;
     }
@@ -26,9 +25,9 @@
       .prev {
         width: 50%;
         height: 100%;
-
         float: left;
       }
+
       .next {
         width: 50%;
         height: 100%;

@@ -7,13 +7,11 @@ const Intro = () => {
   const [slideValue, setSlideValue] = useState(0);
 
   const copy = slideValue + 'vw';
-  //width값은 vw로 나와야 하는데 여기서 단위를 추가해 준다.
 
   const prev = () => {
     if (slide > 0) {
       setSlide(slide - 1);
       setSlideValue(slideValue + 100);
-      //슬라이드의 width 값은 300인데 보여지는 슬라이드 값은 100이므로 +100씩 (200, 300) 추가가 되어 다음 이미지가 보여진다.
     }
   };
 
@@ -22,7 +20,6 @@ const Intro = () => {
     if (slide < slideChild - 1) {
       setSlide(slide + 1);
       setSlideValue(slideValue - 100);
-      //위와 반대로 실행됨. 분명히 코드를 줄일 수 있을 것 같은데 효과적으로~ 깔끔하게~  줄일 수 있는 방법이 있지 않을까
     }
   };
 
