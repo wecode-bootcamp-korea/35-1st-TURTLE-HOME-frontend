@@ -15,7 +15,6 @@ const MainCategory = () => {
 
   return (
     <div className="category_box">
-      {console.log(category)}
       {category.map(list => (
         <div className="category_list" key={list.id}>
           <img src={list.image_url} alt="category list" />
