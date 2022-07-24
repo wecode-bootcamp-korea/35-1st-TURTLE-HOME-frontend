@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './ProductList.scss';
 
-const ProductList = ({ url, alt, name, price }) => {
+const ProductList = ({ id, url, alt, name, price }) => {
+  const navigate = useNavigate();
+  const goToProductDetail = () => {
+    navigate(`product/${id}`);
+  };
+
   return (
     <li className="product-item">
-      <Link to="">
-        <div className="product-img">
-          <img src={url} alt={alt} />
-        </div>
-      </Link>
+      <div className="product-img" onClick={goToProductDetail}>
+        <img src={url} alt={alt} />
+      </div>
       <div className="product-info">
         <h2>{name}</h2>
         <div className="product-price">

@@ -5,7 +5,11 @@ import './SubCategory.scss';
 const SubCategory = () => {
   const [products, setProducts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState({
+    order: '',
+    price: '',
+    sizes: '',
+  });
 
   /* 데이터 로딩 */
   useEffect(() => {
@@ -23,10 +27,19 @@ const SubCategory = () => {
   };
 
   const handleChange = e => {
-    const { value } = e.target;
+    const { value, name } = e.target;
+    console.log(e);
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
   };
 
-  const reset = e => {};
+  console.log('inputValue', inputValue);
+
+  const optionReset = () => {
+    setInputValue({ ...inputValue, order: '', price: '', sizes: '' });
+  };
 
   return (
     <section className="products">
@@ -39,7 +52,7 @@ const SubCategory = () => {
       </div>
       {/* 필터 모달 */}
       <div className="filter-modal">
-        <div className={modalOpen && 'filter-backdrop'} onClick={closeModal}>
+        <div className={modalOpen && 'filter-backdrop'}>
           <div
             className={'filter-container' + (modalOpen === true ? ' open' : '')}
           >
@@ -69,11 +82,21 @@ const SubCategory = () => {
                       <label>낮은 가격순</label>
                     </div>
                     <div className="option">
-                      <input type="radio" name="order" value="high-to-low" />
+                      <input
+                        type="radio"
+                        name="order"
+                        value="high-to-low"
+                        onChange={handleChange}
+                      />
                       <label>높은 가격순</label>
                     </div>
                     <div className="option">
-                      <input type="radio" name="order" value="new" />
+                      <input
+                        type="radio"
+                        name="order"
+                        value="new"
+                        onChange={handleChange}
+                      />
                       <label>신상품</label>
                     </div>
                   </div>
@@ -85,7 +108,12 @@ const SubCategory = () => {
                   </div>
                   <div className="options">
                     <div className="option">
-                      <input type="checkbox" name="price" value="0to50000" />
+                      <input
+                        type="checkbox"
+                        name="price"
+                        value="0to50000"
+                        onChange={handleChange}
+                      />
                       <label>0원 - 50,000원</label>
                     </div>
                     <div className="option">
@@ -93,6 +121,7 @@ const SubCategory = () => {
                         type="checkbox"
                         name="price"
                         value="50000to100000"
+                        onChange={handleChange}
                       />
                       <label>50,000원 - 100,000원</label>
                     </div>
@@ -101,11 +130,17 @@ const SubCategory = () => {
                         type="checkbox"
                         name="price"
                         value="100000to200000"
+                        onChange={handleChange}
                       />
                       <label>100,000원 - 200,000원</label>
                     </div>
                     <div className="option">
-                      <input type="checkbox" name="price" value="200000over" />
+                      <input
+                        type="checkbox"
+                        name="price"
+                        value="200000over"
+                        onChange={handleChange}
+                      />
                       <label>200,000원 이상</label>
                     </div>
                   </div>
@@ -117,26 +152,46 @@ const SubCategory = () => {
                   </div>
                   <div className="options">
                     <div className="option">
-                      <input type="checkbox" name="sizes" value="single" />
+                      <input
+                        type="checkbox"
+                        name="sizes"
+                        value="single"
+                        onChange={handleChange}
+                      />
                       <label>싱글</label>
                     </div>
                     <div className="option">
-                      <input type="checkbox" name="sizes" value="double" />
+                      <input
+                        type="checkbox"
+                        name="sizes"
+                        value="double"
+                        onChange={handleChange}
+                      />
                       <label>더블</label>
                     </div>
                     <div className="option">
-                      <input type="checkbox" name="sizes" value="queen" />
+                      <input
+                        type="checkbox"
+                        name="sizes"
+                        value="queen"
+                        onChange={handleChange}
+                      />
                       <label>퀸</label>
                     </div>
                     <div className="option">
-                      <input type="checkbox" name="sizes" value="king" />
+                      <input
+                        type="checkbox"
+                        name="sizes"
+                        value="king"
+                        onChange={handleChange}
+                      />
                       <label>킹</label>
                     </div>
                   </div>
                 </li>
               </ul>
               <div className="filter-footer">
-                <div className="footer-box" onClick={reset}>
+                <div className="footer-box" onClick={optionReset}>
                   초기화
                 </div>
                 <div className="footer-box" onClick={closeModal}>

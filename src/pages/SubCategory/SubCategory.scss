@@ -40,10 +40,12 @@
 
     .filter-container {
       position: absolute;
+      top: 0;
       left: 100%;
       width: 320px;
       height: 100vh;
       background: white;
+      z-index: 5000;
 
       .filter-header {
         @include flexContainer(center, space-between);
