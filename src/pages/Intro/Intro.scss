@@ -1,8 +1,7 @@
 .intro {
-  // width: 100%;
   .slide-wrap {
     position: relative;
-    // width: 100vw;
+    width: 100vw;
     height: 0;
     padding-bottom: 70%;
     overflow: hidden;
@@ -16,6 +15,7 @@
       width: 300vw;
       transition: all 0.8s ease-in-out;
     }
+
     .btn-box {
       position: absolute;
       left: 0;

@@ -68,7 +68,7 @@ const IMAGES = [
     id: 2,
     src: '/images/slide2.jpg',
     alt: '두 번째 이미지',
-    // content: 'COZY BEDDING',
+    content: 'COZY BEDDING',
   },
   {
     id: 3,
