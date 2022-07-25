@@ -7,7 +7,14 @@ const ProductList = ({ products }) => {
     <section>
       <ul className="product-list">
         {products.map(({ id, url, alt, name, price }) => (
-          <Product key={id} url={url} alt={alt} name={name} price={price} />
+          <Product
+            key={id}
+            id={id}
+            url={url}
+            alt={alt}
+            name={name}
+            price={price}
+          />
         ))}
       </ul>
     </section>
