@@ -1,25 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import './SubCategory.scss';
 
 const SubCategory = () => {
   const [products, setProducts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  let [isChecked, setIsChecked] = useState(false);
   const [inputValue, setInputValue] = useState({
-    order: '',
+    sort_by: '',
     prices: '',
-    sizes: '',
+    size: '',
   });
 
-  const params = useParams();
-  console.log(params.id);
+  const [searchParams] = useSearchParams();
+
+  const sort_by = searchParams.get('sort_by');
+  const prices = searchParams.get('prices');
+  const size = searchParams.get('size');
+
+  const navigate = useNavigate();
+
+  const applyFilter = () => {
+    navigate(
+      `/products?sort_by=${inputValue.sort_by}&prices=${inputValue.prices}&size=${inputValue.size}`
+    );
+
+    fetch(
+      `http://10.58.0.176:8000/products?sort_by=${sort_by}&prices=${prices}&size=${size}`
+    )
+      .then(res => res.json())
+      .then(data => setProducts(data.result));
+  };
 
   useEffect(() => {
     fetch(`http://10.58.0.176:8000/products`)
       .then(res => res.json())
       .then(data => setProducts(data.result));
   }, []);
+
+  console.log(inputValue);
 
   const openModal = () => {
     setModalOpen(true);
@@ -36,10 +56,20 @@ const SubCategory = () => {
       ...inputValue,
       [name]: value,
     });
+
+    isChecked = e.target.checked;
+    console.log(isChecked);
+    isChecked === true && setIsChecked(false);
   };
 
   const optionReset = () => {
-    setInputValue({ order: '', prices: '', sizes: '' });
+    setInputValue({ sort_by: '', prices: '', size: '' });
+
+    navigate(`/products`);
+
+    fetch(`http://10.58.0.176:8000/products`)
+      .then(res => res.json())
+      .then(data => setProducts(data.result));
   };
 
   return (
@@ -76,8 +106,8 @@ const SubCategory = () => {
                     <div className="option">
                       <input
                         type="radio"
-                        name="order"
-                        value="price"
+                        name="sort_by"
+                        value="low_price"
                         onChange={handleChange}
                       />
                       <label>낮은 가격순</label>
@@ -85,8 +115,8 @@ const SubCategory = () => {
                     <div className="option">
                       <input
                         type="radio"
-                        name="order"
-                        value="-price"
+                        name="sort_by"
+                        value="high_price"
                         onChange={handleChange}
                       />
                       <label>높은 가격순</label>
@@ -94,8 +124,8 @@ const SubCategory = () => {
                     <div className="option">
                       <input
                         type="radio"
-                        name="order"
-                        value="-id"
+                        name="sort_by"
+                        value="newest"
                         onChange={handleChange}
                       />
                       <label>신상품</label>
@@ -110,16 +140,16 @@ const SubCategory = () => {
                   <div className="options">
                     <div className="option">
                       <input
-                        type="checkbox"
+                        type="radio"
                         name="prices"
-                        value="0to50000"
+                        value="[0, 50000]"
                         onChange={handleChange}
                       />
                       <label>0원 - 50,000원 미만</label>
                     </div>
                     <div className="option">
                       <input
-                        type="checkbox"
+                        type="radio"
                         name="prices"
                         value="50000to100000"
                         onChange={handleChange}
@@ -128,7 +158,7 @@ const SubCategory = () => {
                     </div>
                     <div className="option">
                       <input
-                        type="checkbox"
+                        type="radio"
                         name="prices"
                         value="100000to200000"
                         onChange={handleChange}
@@ -137,7 +167,7 @@ const SubCategory = () => {
                     </div>
                     <div className="option">
                       <input
-                        type="checkbox"
+                        type="radio"
                         name="prices"
                         value="200000over"
                         onChange={handleChange}
@@ -146,7 +176,7 @@ const SubCategory = () => {
                     </div>
                   </div>
                 </li>
-                <li className="sizes">
+                <li className="size">
                   <div className="filter-tab">
                     <span>사이즈</span>
                     <span>-</span>
@@ -154,8 +184,8 @@ const SubCategory = () => {
                   <div className="options">
                     <div className="option">
                       <input
-                        type="checkbox"
-                        name="sizes"
+                        type="radio"
+                        name="size"
                         value="single"
                         onChange={handleChange}
                       />
@@ -163,8 +193,8 @@ const SubCategory = () => {
                     </div>
                     <div className="option">
                       <input
-                        type="checkbox"
-                        name="sizes"
+                        type="radio"
+                        name="size"
                         value="double"
                         onChange={handleChange}
                       />
@@ -172,8 +202,8 @@ const SubCategory = () => {
                     </div>
                     <div className="option">
                       <input
-                        type="checkbox"
-                        name="sizes"
+                        type="radio"
+                        name="size"
                         value="queen"
                         onChange={handleChange}
                       />
@@ -181,8 +211,8 @@ const SubCategory = () => {
                     </div>
                     <div className="option">
                       <input
-                        type="checkbox"
-                        name="sizes"
+                        type="radio"
+                        name="size"
                         value="king"
                         onChange={handleChange}
                       />
@@ -192,11 +222,14 @@ const SubCategory = () => {
                 </li>
               </ul>
               <div className="filter-footer">
-                <div className="footer-box" onClick={optionReset}>
-                  초기화
-                </div>
-                <div className="footer-box" onClick={closeModal}>
-                  닫기
+                <input
+                  type="reset"
+                  className="footer-box"
+                  value="초기화"
+                  onClick={optionReset}
+                ></input>
+                <div className="footer-box" onClick={applyFilter}>
+                  적용
                 </div>
               </div>
             </form>
