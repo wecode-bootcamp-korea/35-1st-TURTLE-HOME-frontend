@@ -8,23 +8,17 @@ const SubCategory = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState({
     order: '',
-    price: '',
+    prices: '',
     sizes: '',
   });
 
   const params = useParams();
   console.log(params.id);
 
-  // useEffect(() => {
-  //   fetch(`${API}/${params.id}`)
-  //     .then(res => res.json())
-  //     .then(data => setProducts(data));
-  // }, []);
-
   useEffect(() => {
-    fetch('/data/mock.json')
+    fetch(`http://10.58.0.176:8000/products`)
       .then(res => res.json())
-      .then(data => setProducts(data));
+      .then(data => setProducts(data.result));
   }, []);
 
   const openModal = () => {
@@ -37,17 +31,15 @@ const SubCategory = () => {
 
   const handleChange = e => {
     const { value, name } = e.target;
-    // console.log(e);
+
     setInputValue({
       ...inputValue,
       [name]: value,
     });
   };
 
-  console.log('inputValue', inputValue);
-
   const optionReset = () => {
-    setInputValue({ order: '', price: '', sizes: '' });
+    setInputValue({ order: '', prices: '', sizes: '' });
   };
 
   return (
@@ -119,34 +111,34 @@ const SubCategory = () => {
                     <div className="option">
                       <input
                         type="checkbox"
-                        name="price"
+                        name="prices"
                         value="0to50000"
                         onChange={handleChange}
                       />
-                      <label>0원 - 50,000원</label>
+                      <label>0원 - 50,000원 미만</label>
                     </div>
                     <div className="option">
                       <input
                         type="checkbox"
-                        name="price"
+                        name="prices"
                         value="50000to100000"
                         onChange={handleChange}
                       />
-                      <label>50,000원 - 100,000원</label>
+                      <label>50,000원 - 100,000원 미만</label>
                     </div>
                     <div className="option">
                       <input
                         type="checkbox"
-                        name="price"
+                        name="prices"
                         value="100000to200000"
                         onChange={handleChange}
                       />
-                      <label>100,000원 - 200,000원</label>
+                      <label>100,000원 - 200,000원 미만</label>
                     </div>
                     <div className="option">
                       <input
                         type="checkbox"
-                        name="price"
+                        name="prices"
                         value="200000over"
                         onChange={handleChange}
                       />
@@ -212,14 +204,14 @@ const SubCategory = () => {
         </div>
       </div>
       <ul className="product-items">
-        {products.map(({ id, url, alt, name, price }) => (
+        {products.map(({ id, image_url, name, prices }) => (
           <ProductList
             key={id}
             id={id}
-            url={url}
-            alt={alt}
+            image_url={image_url}
+            alt={name}
             name={name}
-            price={price}
+            prices={prices}
           />
         ))}
       </ul>
