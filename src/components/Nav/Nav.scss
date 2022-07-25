@@ -14,8 +14,7 @@
       opacity: 0.5;
     }
   }
-
-  .logo-space {
+  a .logo-space {
     height: 12%;
     background-color: transparent;
   }
@@ -23,6 +22,7 @@
   .nav-header {
     span {
       margin-bottom: 10px;
+
       &:not(.header-copy) {
         padding-left: 10px;
       }

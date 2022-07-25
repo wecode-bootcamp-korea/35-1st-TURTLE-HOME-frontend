@@ -17,10 +17,10 @@ const NavMenuComponent = ({ element }) => {
         {element.name}
       </span>
       {subMenuOpen
-        ? element['category'].map((ele, i) => {
+        ? element['category'].map((subElement, i) => {
             return (
               <span key={i} className="main-sub-menus">
-                {ele}
+                {subElement}
               </span>
             );
           })
