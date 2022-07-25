@@ -5,8 +5,10 @@ const DetailSize = ({
   index,
   size,
   price,
-  selectedNumber,
-  setSelectedNumber,
+  selectedComponentNumber,
+  setSelectedComponentNumber,
+  totalPriceArray,
+  setTotalPriceArray,
 }) => {
   const [sizeComponentHover, setSizeComponentHover] = useState(false);
   const sizeComponentHoverHandler = () => {
@@ -21,20 +23,25 @@ const DetailSize = ({
     setorderNumber(prev => prev + 1);
   };
 
-  const priceWithComma = price
+  const priceWithComma = (price * orderNumber)
     .toString()
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 
+  const newPriceArray = [...totalPriceArray];
+  newPriceArray[index] = price * orderNumber;
+  setTotalPriceArray(newPriceArray);
+
   return (
     <div
-      className={
-        sizeComponentHover ? 'size-component background-gray' : 'size-component'
-      }
+      className={`size-component
+            ${sizeComponentHover ? 'background-gray' : null}
+           ${selectedComponentNumber === index ? 'background-gray' : null}`}
       onMouseOver={sizeComponentHoverHandler}
       onMouseOut={sizeComponentHoverHandler}
-      onClick={setSelectedNumber(index)}
+      onClick={() => {
+        setSelectedComponentNumber(index);
+      }}
     >
-      {console.log(index)}
       <div className="size-left">
         <span className="size-korean">{size}</span>
         <span className="size-number">(120 x 130)</span>
