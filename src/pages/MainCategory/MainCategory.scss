@@ -7,12 +7,11 @@
   width: 100vw;
 
   .category_list {
+    @include flexContainer(center, center);
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     float: left;
     width: 25%;
+    cursor: pointer;
 
     img {
       object-fit: cover;

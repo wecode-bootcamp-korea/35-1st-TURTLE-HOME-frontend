@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { config } from '../../components/Config/Config';
+
 import './MainCategory.scss';
 
 const MainCategory = () => {
   const [category, setCategory] = useState([]);
-  const number = 1;
   const navigate = useNavigate();
-  const goToSubCategory = () => {
-    navigate(`category/${category.id}`);
+
+  const goToSubCategory = id => {
+    navigate(`/productlist`);
   };
-  console.log(category);
+
   useEffect(() => {
-    fetch(`http://10.58.7.243:8000/categories/${number}/subcategories`)
+    fetch(`${config.productApi}/categories/1/subcategories`)
       .then(res => res.json())
       .then(data => {
         setCategory(data.result);
@@ -21,8 +23,14 @@ const MainCategory = () => {
   return (
     <div className="category_box">
       {category.map(list => (
-        <div className="category_list" key={list.id} onClick={goToSubCategory}>
-          <img src={list.image_url} alt="category list" />
+        <div
+          className="category_list"
+          key={list.id}
+          onClick={() => {
+            goToSubCategory(list.id);
+          }}
+        >
+          <img src={list.image_url} alt="categoryList" />
           <p>{list.name}</p>
         </div>
       ))}
