@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import './SubCategory.scss';
 
@@ -11,7 +12,15 @@ const SubCategory = () => {
     sizes: '',
   });
 
-  /* 데이터 로딩 */
+  const params = useParams();
+  console.log(params.id);
+
+  // useEffect(() => {
+  //   fetch(`${API}/${params.id}`)
+  //     .then(res => res.json())
+  //     .then(data => setProducts(data));
+  // }, []);
+
   useEffect(() => {
     fetch('/data/mock.json')
       .then(res => res.json())
@@ -28,7 +37,7 @@ const SubCategory = () => {
 
   const handleChange = e => {
     const { value, name } = e.target;
-    console.log(e);
+    // console.log(e);
     setInputValue({
       ...inputValue,
       [name]: value,
@@ -38,7 +47,7 @@ const SubCategory = () => {
   console.log('inputValue', inputValue);
 
   const optionReset = () => {
-    setInputValue({ ...inputValue, order: '', price: '', sizes: '' });
+    setInputValue({ order: '', price: '', sizes: '' });
   };
 
   return (
@@ -76,7 +85,7 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="order"
-                        value="low-to-high"
+                        value="price"
                         onChange={handleChange}
                       />
                       <label>낮은 가격순</label>
@@ -85,7 +94,7 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="order"
-                        value="high-to-low"
+                        value="-price"
                         onChange={handleChange}
                       />
                       <label>높은 가격순</label>
@@ -94,7 +103,7 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="order"
-                        value="new"
+                        value="-id"
                         onChange={handleChange}
                       />
                       <label>신상품</label>
@@ -204,7 +213,14 @@ const SubCategory = () => {
       </div>
       <ul className="product-items">
         {products.map(({ id, url, alt, name, price }) => (
-          <ProductList key={id} url={url} alt={alt} name={name} price={price} />
+          <ProductList
+            key={id}
+            id={id}
+            url={url}
+            alt={alt}
+            name={name}
+            price={price}
+          />
         ))}
       </ul>
     </section>

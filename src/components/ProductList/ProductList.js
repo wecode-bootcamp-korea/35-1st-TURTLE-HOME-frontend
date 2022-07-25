@@ -5,7 +5,7 @@ import './ProductList.scss';
 const ProductList = ({ id, url, alt, name, price }) => {
   const navigate = useNavigate();
   const goToProductDetail = () => {
-    navigate(`product/${id}`);
+    navigate(`/product/${id}`);
   };
 
   return (
