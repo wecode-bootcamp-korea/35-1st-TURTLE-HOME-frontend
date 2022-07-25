@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './SearchBox.scss';
 
-function SearchBox({ handleSubmit, searchInput, handleChange }) {
+const SearchBox = ({ handleSubmit, searchInput, handleChange }) => {
   return (
     <section className="search-bar">
       <form onSubmit={handleSubmit}>
@@ -18,6 +18,6 @@ function SearchBox({ handleSubmit, searchInput, handleChange }) {
       </Link>
     </section>
   );
-}
+};
 
 export default SearchBox;
