@@ -1,5 +1,6 @@
 import React from 'react';
 import './IntroColumn.scss';
+
 const IntroColumn = ({ src, alt, content }) => {
   return (
     <div className="slide-box">

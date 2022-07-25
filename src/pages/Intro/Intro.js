@@ -3,36 +3,29 @@ import IntroColumn from './IntroColumn';
 import './Intro.scss';
 
 const Intro = () => {
-  const [slide, setSlide] = useState(0);
-  const [slideValue, setSlideValue] = useState(0);
-
-  const copy = slideValue + 'vw';
-
-  const prev = () => {
-    if (slide > 0) {
-      setSlide(slide - 1);
-      setSlideValue(slideValue + 100);
+  const [numberSlides, setNumberSlide] = useState(0);
+  const copy = `${numberSlides * -100}vw`;
+  const goPrevImg = () => {
+    if (numberSlides > 0) {
+      setNumberSlide(numberSlides - 1);
     }
   };
 
-  const next = () => {
+  const goNextImg = () => {
     let slideChild = IMAGES.length;
-    if (slide < slideChild - 1) {
-      setSlide(slide + 1);
-      setSlideValue(slideValue - 100);
+    if (numberSlides < slideChild - 1) {
+      setNumberSlide(numberSlides + 1);
     }
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      slideValue === -200
-        ? setSlideValue(0)
-        : setSlideValue(prev => prev - 100);
+      numberSlides === 2 ? setNumberSlide(0) : setNumberSlide(prev => prev + 1);
     }, 3000);
     return () => {
       clearInterval(interval);
     };
-  }, [slideValue]);
+  }, [numberSlides]);
 
   return (
     <div className="intro">
@@ -44,8 +37,8 @@ const Intro = () => {
           ;
         </div>
         <div className="btn-box">
-          <div className="prev" onClick={prev} />
-          <div className="next" onClick={next} />
+          <div className="prevSlide" onClick={goPrevImg} />
+          <div className="nextSlide" onClick={goNextImg} />
         </div>
       </div>
     </div>
