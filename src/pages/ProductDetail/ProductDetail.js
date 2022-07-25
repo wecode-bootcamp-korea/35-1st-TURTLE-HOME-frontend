@@ -27,14 +27,7 @@ const ProductDetail = () => {
 
   const [selectedComponentNumber, setSelectedComponentNumber] = useState(0);
 
-  const [totalPriceArray, setTotalPriceArray] = useState([0, 0, 0, 0, 0]);
-  const totalPrice = 0;
-
-  {
-    totalPriceArray.forEach(e => {
-      totalPrice = totalPrice + e;
-    });
-  }
+  const [totalPrice, setTotalPrice] = useState(0);
 
   return (
     <div className="product-detail">
@@ -63,8 +56,8 @@ const ProductDetail = () => {
                   price={element.price}
                   selectedComponentNumber={selectedComponentNumber}
                   setSelectedComponentNumber={setSelectedComponentNumber}
-                  totalPriceArray={totalPriceArray}
-                  setTotalPriceArray={setTotalPriceArray}
+                  totalPrice={totalPrice}
+                  setTotalPrice={setTotalPrice}
                 />
               );
             })}
@@ -72,7 +65,7 @@ const ProductDetail = () => {
         </div>
         <div className="detail-footer">
           <button className="put-shopping-basket">
-            장바구니에 담기 ({totalPrice})
+            장바구니에 담기 ({totalPrice}원)
           </button>
         </div>
       </div>
