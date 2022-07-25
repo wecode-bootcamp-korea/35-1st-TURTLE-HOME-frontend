@@ -1,0 +1,23 @@
+@import '../../styles/mixin.scss';
+
+.search-product-item {
+  margin-bottom: 100px;
+
+  .product-img {
+    img {
+      width: 100%;
+    }
+  }
+  .product-info {
+    @include flexContainer(flex-start, center);
+    flex-direction: column;
+    width: 100%;
+    font-size: 15px;
+
+    h2 {
+      width: 100%;
+      padding: 13px 0;
+      font-size: large;
+    }
+  }
+}
