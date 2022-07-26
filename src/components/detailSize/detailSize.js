@@ -64,7 +64,7 @@ const DetailSize = ({
             orderNumberMinus();
           }}
         >
-          <i class="fa-solid fa-minus"></i>
+          <i className="fa-solid fa-minus"></i>
         </span>
         <div className="orderNumberCount">{orderNumber}</div>
         <span
@@ -72,7 +72,7 @@ const DetailSize = ({
             orderNumberPlus();
           }}
         >
-          <i class="fa-solid fa-plus"></i>
+          <i className="fa-solid fa-plus"></i>
         </span>
       </div>
     </div>

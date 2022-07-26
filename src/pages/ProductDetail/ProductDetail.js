@@ -10,13 +10,11 @@ const ProductDetail = () => {
   const params = useParams();
 
   useEffect(() => {
-    fetch(`http://10.58.7.243:8000/products/${params.current.id}`)
+    // fetch('./data/detail.json')
+    fetch(`http://10.58.7.243:8000/products/${params.id}`)
       .then(response => response.json())
       .then(data => setData(data.result));
-
-    //   .then(data => setData(data.result));
-    // fetch('./data/detail.json')
-  }, []);
+  }, [params.id]);
 
   const [minPrice, maxPrice] = [
     data.description &&
@@ -24,7 +22,7 @@ const ProductDetail = () => {
         .toString()
         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
     data.description &&
-      data.options[1].price /* 인덱스 4로 바꿔야함 */
+      data.options[4].price /* 인덱스 4로 바꿔야함 */
         .toString()
         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
   ];
