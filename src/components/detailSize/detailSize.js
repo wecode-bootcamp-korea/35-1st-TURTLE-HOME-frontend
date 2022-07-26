@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import './detailSize.scss';
 
 const DetailSize = ({
@@ -7,7 +7,6 @@ const DetailSize = ({
   price,
   selectedComponentNumber,
   setSelectedComponentNumber,
-  totalPrice,
   setTotalPrice,
 }) => {
   const [sizeComponentHover, setSizeComponentHover] = useState(false);
@@ -15,26 +14,24 @@ const DetailSize = ({
     setSizeComponentHover(prev => !prev);
   };
 
-  // const [orderNumber, setOrderNumber] = useState(1);
+  // const orderNumber = useRef(1);
 
-  const orderNumber = useRef(1);
+  const [orderNumber, setOrderNumber] = useState(1);
 
   const orderNumberMinus = () => {
-    orderNumber.current > 1 && --orderNumber.current;
+    orderNumber > 1 && setOrderNumber(prev => prev - 1);
   };
   const orderNumberPlus = () => {
-    ++orderNumber.current;
+    setOrderNumber(prev => prev + 1);
   };
 
-  const priceWithComma = (price * orderNumber.current)
-    .toString()
-    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+  // const priceWithComma = (price * orderNumber)
+  //   .toString()
+  //   .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 
   const totalPriceChange = () => {
-    setTotalPrice(priceWithComma);
+    setTotalPrice(orderNumber * price);
   };
-
-  const [render, setRender] = useState('');
 
   return (
     <div
@@ -48,7 +45,6 @@ const DetailSize = ({
         totalPriceChange();
       }}
     >
-      {' '}
       <div className="size-left">
         <span className="size-korean">{size}</span>
         <span className="size-number">(120 x 130)</span>
@@ -57,7 +53,7 @@ const DetailSize = ({
         className={`
       ${selectedComponentNumber === index ? 'display' : 'size-price'}`}
       >
-        {priceWithComma} 원
+        {orderNumber * price} 원
       </span>
       <div
         className={`
@@ -66,16 +62,14 @@ const DetailSize = ({
         <span
           onClick={() => {
             orderNumberMinus();
-            setRender('');
           }}
         >
           <i class="fa-solid fa-minus"></i>
         </span>
-        <div className="orderNumberCount">{orderNumber.current}</div>
+        <div className="orderNumberCount">{orderNumber}</div>
         <span
           onClick={() => {
             orderNumberPlus();
-            setRender('');
           }}
         >
           <i class="fa-solid fa-plus"></i>

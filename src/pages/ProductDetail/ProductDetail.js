@@ -56,7 +56,6 @@ const ProductDetail = () => {
                   price={element.price}
                   selectedComponentNumber={selectedComponentNumber}
                   setSelectedComponentNumber={setSelectedComponentNumber}
-                  totalPrice={totalPrice}
                   setTotalPrice={setTotalPrice}
                 />
               );
