@@ -47,7 +47,10 @@ const Search = () => {
       {filteringProducts.length === 0 ? (
         <SearchResult searchWord={searchWord.current} />
       ) : (
-        <ProductList products={filteringProducts} />
+        <ProductList
+          products={filteringProducts}
+          className="search-product-list"
+        />
       )}
     </main>
   );
