@@ -6,7 +6,6 @@ import './SubCategory.scss';
 const SubCategory = () => {
   const [products, setProducts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  let [isChecked, setIsChecked] = useState(false);
   const [inputValue, setInputValue] = useState({
     sort_by: '',
     prices: '',
@@ -33,13 +32,17 @@ const SubCategory = () => {
       .then(data => setProducts(data.result));
   };
 
-  useEffect(() => {
-    fetch(`http://10.58.0.176:8000/products`)
-      .then(res => res.json())
-      .then(data => setProducts(data.result));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://10.58.0.176:8000/products`)
+  //     .then(res => res.json())
+  //     .then(data => setProducts(data.result));
+  // }, []);
 
-  console.log(inputValue);
+  useEffect(() => {
+    fetch(`/data/mock.json`)
+      .then(res => res.json())
+      .then(data => setProducts(data));
+  }, []);
 
   const openModal = () => {
     setModalOpen(true);
@@ -47,19 +50,6 @@ const SubCategory = () => {
 
   const closeModal = () => {
     setModalOpen(false);
-  };
-
-  const handleChange = e => {
-    const { value, name } = e.target;
-
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
-
-    isChecked = e.target.checked;
-    console.log(isChecked);
-    isChecked === true && setIsChecked(false);
   };
 
   const optionReset = () => {
@@ -70,6 +60,16 @@ const SubCategory = () => {
     fetch(`http://10.58.0.176:8000/products`)
       .then(res => res.json())
       .then(data => setProducts(data.result));
+  };
+
+  //---------분리-------------------
+  const handleChange = e => {
+    const { value, name } = e.target;
+
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
   };
 
   return (
@@ -90,7 +90,7 @@ const SubCategory = () => {
             <div className="filter-header">
               <h2>필터</h2>
               <img
-                src="/images/x-thin.png"
+                src="/images/x_thin.png"
                 alt="close button"
                 onClick={closeModal}
               />
@@ -100,7 +100,9 @@ const SubCategory = () => {
                 <li className="order">
                   <div className="filter-tab">
                     <span>종류</span>
-                    <span>-</span>
+                    <span>
+                      <img src="/images/minus.png" alt="minus" />
+                    </span>
                   </div>
                   <div className="options">
                     <div className="option">
@@ -135,7 +137,9 @@ const SubCategory = () => {
                 <li className="price">
                   <div className="filter-tab">
                     <span>가격</span>
-                    <span>-</span>
+                    <span>
+                      <img src="/images/minus.png" alt="minus" />
+                    </span>
                   </div>
                   <div className="options">
                     <div className="option">
@@ -160,10 +164,19 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="prices"
+                        value="50000to100000"
+                        onChange={handleChange}
+                      />
+                      <label>100,000원 - 150,000원 미만</label>
+                    </div>
+                    <div className="option">
+                      <input
+                        type="radio"
+                        name="prices"
                         value="100000to200000"
                         onChange={handleChange}
                       />
-                      <label>100,000원 - 200,000원 미만</label>
+                      <label>150,000원 - 200,000원 미만</label>
                     </div>
                     <div className="option">
                       <input
@@ -179,7 +192,9 @@ const SubCategory = () => {
                 <li className="size">
                   <div className="filter-tab">
                     <span>사이즈</span>
-                    <span>-</span>
+                    <span>
+                      <img src="/images/minus.png" alt="minus" />
+                    </span>
                   </div>
                   <div className="options">
                     <div className="option">
@@ -236,18 +251,7 @@ const SubCategory = () => {
           </div>
         </div>
       </div>
-      <ul className="product-items">
-        {products.map(({ id, image_url, name, prices }) => (
-          <ProductList
-            key={id}
-            id={id}
-            image_url={image_url}
-            alt={name}
-            name={name}
-            prices={prices}
-          />
-        ))}
-      </ul>
+      <ProductList products={products} className="product-list" />
     </section>
   );
 };

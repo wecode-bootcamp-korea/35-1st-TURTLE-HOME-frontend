@@ -8,7 +8,7 @@
   height: 100px;
   padding: 10px 15px 0 20px;
   font-family: Arial, ZH-Sans, 'Lucida Sans Unicode', sans-serif, 'icomoon';
-  z-index: 100;
+  z-index: 1000;
 
   .left-container {
     @include flexContainer(center, center);
@@ -59,5 +59,11 @@
         font-size: 13px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .center-container {
+    display: none;
   }
 }
