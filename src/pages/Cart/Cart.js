@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
-import './Basket.scss';
+import './Cart.scss';
 
-const Basket = () => {
+const Cart = () => {
   return (
-    <div className="basket">
-      <div className="basket-header">
+    <div className="cart">
+      <div className="cart-header">
         <span>장바구니 number</span>
         <hr></hr>
       </div>
-      <div className="basket-main">
+      <div className="cart-main">
         <div className="left-section"></div>
         <div className="right-section">
-          <div className="basket-right-title">제품</div>
+          <div className="cart-right-title">제품</div>
           <hr></hr>
-          <div className="basket-right-total">
-            <div className="basket-small-total">
+          <div className="cart-right-total">
+            <div className="cart-small-total">
               <span>총 제품 : 세금 포함</span>
               <span>1,012,000원</span>
             </div>
-            <div className="basket-big-total">
+            <div className="cart-big-total">
               <span>합계 :</span>
               <span>1,012,000원*</span>
             </div>
           </div>
-          <div className="basket-promotion-span">
+          <div className="cart-promotion-span">
             프로모션 코드가 있으신가요? 나중에 결제 페이지에서 입력하십시오.
           </div>
-          <button className="basket-order">주문하기</button>
+          <button className="cart-order">주문하기</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Basket;
+export default Cart;
