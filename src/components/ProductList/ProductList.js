@@ -3,8 +3,15 @@ import Product from '../Product/Product';
 import './ProductList.scss';
 
 const ProductList = ({ products, className }) => {
-  const productClassName =
-    className === 'product-list' ? 'product-item' : 'search-product-item';
+  const productClassName = () => {
+    if (className === 'product-list') {
+      return 'product-item';
+    } else if (className === 'search-product-list') {
+      return 'search-product-item';
+    } else if (className === 'cart-product-list') {
+      return 'cart-product-item';
+    }
+  };
 
   return (
     <ul className={className}>
@@ -12,7 +19,7 @@ const ProductList = ({ products, className }) => {
         <Product
           key={id}
           id={id}
-          productClassName={productClassName}
+          productClassName={productClassName()}
           image_url={image_url}
           alt={name}
           name={name}
