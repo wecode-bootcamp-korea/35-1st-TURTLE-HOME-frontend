@@ -1,19 +1,31 @@
-.ham-menu {
-  position: fixed;
-  top: 42px;
-  left: 25px;
-  font-size: 26px;
+.logo-space {
+  background-color: transparent;
+
+  .ham-menu {
+    position: fixed;
+    top: 62px;
+    left: 30px;
+    font-size: 26px;
+    z-index: 3000;
+    cursor: pointer;
+  }
 }
 
 .nav {
   position: fixed;
-  width: 320px;
+  width: 330px;
   height: 100%;
-  padding: 20px;
+  padding: 20px 20px 20px 0;
   transform: translateX(-260px);
   transition: all 0.4s ease-in-out;
   overflow-y: hidden;
-  z-index: 100;
+  z-index: 10;
+
+  .nav-container {
+    margin-top: 100px;
+    padding-left: 20px;
+    background-color: white;
+  }
 
   span {
     display: block;
@@ -22,11 +34,6 @@
     &:hover {
       opacity: 0.5;
     }
-  }
-  .logo-space {
-    height: 12%;
-    background-color: transparent;
-    cursor: pointer;
   }
 
   .nav-header {

@@ -18,9 +18,20 @@ const Nav = () => {
 
   return (
     <>
-      <div className="ham-menu">
-        <i class="fa-solid fa-bars"></i>
+      <div className="logo-space">
+        <div className="ham-menu">
+          <i
+            class="fa-solid fa-bars"
+            onMouseOver={() => {
+              setNavSlide(true);
+            }}
+            onMouseLeave={() => {
+              setNavSlide(false);
+            }}
+          ></i>
+        </div>
       </div>
+
       <div
         className={navSlide ? 'nav nav-transformer' : 'nav'}
         onMouseOver={() => {
@@ -30,42 +41,43 @@ const Nav = () => {
           setNavSlide(false);
         }}
       >
-        <div className="logo-space"></div>
-        <div className="nav-header">
-          <span className="header-copy">TURTLEHOME+</span>
-          <span>ABOUT</span>
-          <span>CAMPAIGN</span>
-          <span>COLLECTION</span>
-        </div>
-        <div className="nav-main">
-          <div className="main-new">
-            <span>신상품</span>
-            <span>SALE</span>
+        <div className="nav-container">
+          <div className="nav-header">
+            <span className="header-copy">TURTLEHOME+</span>
+            <span>ABOUT</span>
+            <span>CAMPAIGN</span>
+            <span>COLLECTION</span>
+          </div>
+          <div className="nav-main">
+            <div className="main-new">
+              <span>신상품</span>
+              <span>SALE</span>
+            </div>
+
+            {MAINMENU_DATA.map((element, i) => {
+              return (
+                <NavMenuComponent
+                  key={i}
+                  element={element}
+                  index={i}
+                  subMenuOpenKey={subMenuOpenKey}
+                  setSubMenuOpenKey={setSubMenuOpenKey}
+                />
+              );
+            })}
           </div>
 
-          {MAINMENU_DATA.map((element, i) => {
-            return (
-              <NavMenuComponent
-                key={i}
-                element={element}
-                index={i}
-                subMenuOpenKey={subMenuOpenKey}
-                setSubMenuOpenKey={setSubMenuOpenKey}
-              />
-            );
-          })}
-        </div>
-
-        <div className="nav-footer">
-          {FOOTERMENU_DATA.map((element, i) => {
-            return (
-              <span key={i} className="footer-menus">
-                {element}
-              </span>
-            );
-          })}
-          <span className="footer-stories">STORIES</span>
-          <span className="info">+INFO</span>
+          <div className="nav-footer">
+            {FOOTERMENU_DATA.map((element, i) => {
+              return (
+                <span key={i} className="footer-menus">
+                  {element}
+                </span>
+              );
+            })}
+            <span className="footer-stories">STORIES</span>
+            <span className="info">+INFO</span>
+          </div>
         </div>
       </div>
     </>
