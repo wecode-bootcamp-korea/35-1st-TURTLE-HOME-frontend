@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import './SubCategory.scss';
 import { API } from '../../components/Config/Config';
@@ -13,20 +13,31 @@ const SubCategory = () => {
     size: '',
   });
 
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
 
-  const sort_by = searchParams.get('sort_by');
-  const prices = searchParams.get('prices');
-  const size = searchParams.get('size');
+  // const sort_by = searchParams.get('sort_by');
+  // const size = searchParams.get('size');
+  // const min_price = searchParams.get('min_price');
+  // const max_price = searchParams.get('max_price');
 
+  const min =
+    inputValue.prices.split('to')[0] !== ''
+      ? inputValue.prices.split('to')[0]
+      : null;
+  const max =
+    inputValue.prices.split('to')[1] !== undefined
+      ? inputValue.prices.split('to')[1]
+      : null;
+
+  const location = useLocation();
   const navigate = useNavigate();
 
   const applyFilter = () => {
     navigate(
-      `/products?sort_by=${inputValue.sort_by}&prices=${inputValue.prices}&size=${inputValue.size}`
+      `/products?sort_by=${inputValue.sort_by}&min_price=${min}&max_price=${max}&size=${inputValue.size}`
     );
 
-    fetch(`${API.products}?sort_by=${sort_by}&prices=${prices}&size=${size}`)
+    fetch(`${API.products}${location.search}`)
       .then(res => res.json())
       .then(data => setProducts(data.result));
   };
@@ -63,6 +74,11 @@ const SubCategory = () => {
       [name]: value,
     });
   };
+
+  // console.log('min, max', min, max);
+  // console.log('location.search', location.search);
+  // console.log('inputValue', inputValue);
+  // console.log('inputValue.prices.split', inputValue.prices.split('to'));
 
   return (
     <section className="products">
@@ -174,7 +190,7 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="prices"
-                        value="200000over"
+                        value="200000"
                         onChange={handleChange}
                       />
                       <label>200,000원 이상</label>
