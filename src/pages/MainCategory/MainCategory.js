@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { config } from '../../components/Config/Config';
+import { API } from '../../components/Config/Config';
 
 import './MainCategory.scss';
 
@@ -13,7 +13,7 @@ const MainCategory = () => {
   };
 
   useEffect(() => {
-    fetch(`${config.productApi}/categories/1/subcategories`)
+    fetch(`${API.categories}/categories/1/subcategories`)
       .then(res => res.json())
       .then(data => {
         setCategory(data.result);
