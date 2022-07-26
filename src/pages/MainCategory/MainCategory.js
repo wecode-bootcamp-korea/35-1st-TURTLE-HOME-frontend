@@ -9,11 +9,11 @@ const MainCategory = () => {
   const navigate = useNavigate();
 
   const goToSubCategory = id => {
-    navigate(`/productlist`);
+    navigate(`/products:id`);
   };
 
   useEffect(() => {
-    fetch(`${API.categories}/categories/1/subcategories`)
+    fetch(`${API.categories}/1/subcategories`)
       .then(res => res.json())
       .then(data => {
         setCategory(data.result);
