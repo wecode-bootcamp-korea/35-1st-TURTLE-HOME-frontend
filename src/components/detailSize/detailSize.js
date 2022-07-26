@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './detailSize.scss';
 
 const DetailSize = ({
@@ -8,30 +8,30 @@ const DetailSize = ({
   selectedComponentNumber,
   setSelectedComponentNumber,
   setTotalPrice,
+  setTotalNumber,
+  addCommaToPrice,
 }) => {
   const [sizeComponentHover, setSizeComponentHover] = useState(false);
   const sizeComponentHoverHandler = () => {
     setSizeComponentHover(prev => !prev);
   };
 
-  // const orderNumber = useRef(1);
-
-  const [orderNumber, setOrderNumber] = useState(1);
+  const orderNumber = useRef(1);
 
   const orderNumberMinus = () => {
-    orderNumber > 1 && setOrderNumber(prev => prev - 1);
+    orderNumber.current > 1 && orderNumber.current--;
+    setTotalNumber(orderNumber.current);
   };
   const orderNumberPlus = () => {
-    setOrderNumber(prev => prev + 1);
+    orderNumber.current = orderNumber.current + 1;
+    setTotalNumber(orderNumber.current);
   };
-
-  // const priceWithComma = (price * orderNumber)
-  //   .toString()
-  //   .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 
   const totalPriceChange = () => {
-    setTotalPrice(orderNumber * price);
+    setTotalPrice(orderNumber.current * price);
   };
+
+  console.log(orderNumber);
 
   return (
     <div
@@ -42,36 +42,28 @@ const DetailSize = ({
       onMouseOut={sizeComponentHoverHandler}
       onClick={() => {
         setSelectedComponentNumber(index);
+        setTotalNumber(orderNumber.current);
         totalPriceChange();
       }}
     >
       <div className="size-left">
         <span className="size-korean">{size}</span>
-        <span className="size-number">(120 x 130)</span>
       </div>
       <span
         className={`
       ${selectedComponentNumber === index ? 'display' : 'size-price'}`}
       >
-        {orderNumber * price} 원
+        {addCommaToPrice(orderNumber.current * price)} 원
       </span>
       <div
         className={`
         ${selectedComponentNumber === index ? 'size-quantity' : 'display'}`}
       >
-        <span
-          onClick={() => {
-            orderNumberMinus();
-          }}
-        >
+        <span onClick={orderNumberMinus}>
           <i className="fa-solid fa-minus"></i>
         </span>
-        <div className="orderNumberCount">{orderNumber}</div>
-        <span
-          onClick={() => {
-            orderNumberPlus();
-          }}
-        >
+        <div className="orderNumberCount">{orderNumber.current}</div>
+        <span onClick={orderNumberPlus}>
           <i className="fa-solid fa-plus"></i>
         </span>
       </div>

@@ -9,7 +9,6 @@ const UserInput = ({
   loginInputHandler,
 }) => {
   const [inputTitleGoUpBtn, setInputTitleGoUpBtn] = useState(false);
-
   const inputGoUpEffector = () => {
     if (inputValue) return;
     else {
@@ -20,11 +19,9 @@ const UserInput = ({
   return (
     <>
       <div className="user-input">
-        {console.log(condition)}
-
         <span
           className={`user-placeholder 
-            ${inputTitleGoUpBtn ? 'input-title-goup' : null}
+          ${inputTitleGoUpBtn ? 'input-title-goup' : null}
            ${!condition && inputValue ? 'input-red' : 'input-gray'}`}
         >
           {koreanName} *

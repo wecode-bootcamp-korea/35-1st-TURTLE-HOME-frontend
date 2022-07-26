@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './ProductDetail.scss';
-import '../../components/detailSize/detailSize';
-import DetailSize from '../../components/detailSize/detailSize';
 import { useParams } from 'react-router-dom';
+import DetailSize from '../../components/detailSize/detailSize';
+import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const [data, setData] = useState({});
@@ -10,26 +9,43 @@ const ProductDetail = () => {
   const params = useParams();
 
   useEffect(() => {
-    // fetch('./data/detail.json')
-    fetch(`http://10.58.7.243:8000/products/${params.id}`)
+    fetch('./data/detail.json')
+      // fetch(`http://10.58.7.243:8000/products/${params.id}`)
       .then(response => response.json())
       .then(data => setData(data.result));
-  }, [params.id]);
+  }, []);
+  // }, [params.id]);
 
+  const addCommaToPrice = price => {
+    return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+  };
   const [minPrice, maxPrice] = [
+    data.description && addCommaToPrice(data.options[0].price),
     data.description &&
-      data.options[0].price
-        .toString()
-        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
-    data.description &&
-      data.options[4].price /* 인덱스 4로 바꿔야함 */
-        .toString()
-        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
+      addCommaToPrice(data.options[data.options.length - 1].price),
   ];
 
   const [selectedComponentNumber, setSelectedComponentNumber] = useState(0);
 
   const [totalPrice, setTotalPrice] = useState(0);
+  const [totalNumber, setTotalNumber] = useState(0);
+
+  const token = localStorage.getItem('token');
+
+  const cartFetch = () => {
+    fetch(`http://10.58.4.113:8000/carts/cart`, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        product_option_id: params.id,
+        quantity: totalNumber,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => console.log('결과: ', result));
+  };
 
   return (
     <div className="product-detail">
@@ -58,14 +74,16 @@ const ProductDetail = () => {
                   price={element.price}
                   selectedComponentNumber={selectedComponentNumber}
                   setSelectedComponentNumber={setSelectedComponentNumber}
+                  setTotalNumber={setTotalNumber}
                   setTotalPrice={setTotalPrice}
+                  addCommaToPrice={addCommaToPrice}
                 />
               );
             })}
           <hr></hr>
         </div>
         <div className="detail-footer">
-          <button className="put-shopping-basket">
+          <button className="put-shopping-basket" onClick={cartFetch}>
             장바구니에 담기 ({totalPrice}원)
           </button>
         </div>
