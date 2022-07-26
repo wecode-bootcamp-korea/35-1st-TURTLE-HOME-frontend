@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import UserInput from '../../components/UserInput/UserInput';
+import UserInput from '../UserInput/UserInput';
 import './Login.scss';
 
-const Login = () => {
+const Login = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
   const [loginInput, setLoginInput] = useState({
     email: '',
     password: '',
@@ -32,7 +31,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+    <div
+      className="login"
+      onClick={e => {
+        e.target.className === 'login' && setLoginWindowBtn(false);
+      }}
+    >
       <div className="container">
         <div className="section-left">
           <div className="login-header">
@@ -76,11 +80,28 @@ const Login = () => {
         </div>
         <div className="section-right">
           <span className="right-section-header">회원 가입</span>
-          <Link to="/signup" className="login-signin-link">
-            <button className="login-signin">계정 만들기</button>
-          </Link>
+          <div
+            onClick={() => {
+              setSignUpWindowBtn(true);
+            }}
+            className="login-signin-link"
+          >
+            <button
+              className="login-signin"
+              onClick={() => {
+                setLoginWindowBtn(false);
+              }}
+            >
+              계정 만들기
+            </button>
+          </div>
         </div>
-        <i class="fa-solid fa-x"></i>
+        <i
+          className="fa-solid fa-x"
+          onClick={() => {
+            setLoginWindowBtn(false);
+          }}
+        ></i>
       </div>
     </div>
   );

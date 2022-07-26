@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import UserInput from '../../components/UserInput/UserInput';
 import USERINPUT_DATA from './data/userInputData';
 import CHECKBOX_DATA from './data/checkboxData';
 import './SignUp.scss';
 
-const SignUp = () => {
+const SignUp = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
   const [signUpInput, setSignUpInput] = useState({
     korean_name: '',
     email: '',
@@ -44,13 +43,23 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signUp">
+    <div
+      className="signUp"
+      onClick={e => {
+        e.target.className === 'signUp' && setSignUpWindowBtn(false);
+      }}
+    >
       <div className="container">
         <div className="section">
           <div className="sign-header">
-            <Link to="/login">
+            <div
+              onClick={() => {
+                setLoginWindowBtn(true);
+                setSignUpWindowBtn(false);
+              }}
+            >
               <i class="fa-solid fa-angle-left"></i>
-            </Link>
+            </div>
             <span className="section-header">자라홈 계정 만들기</span>
             <span> </span>
           </div>
@@ -86,7 +95,12 @@ const SignUp = () => {
             <button>계정만들기</button>
           </form>
         </div>
-        <i class="fa-solid fa-x signup-x"></i>
+        <i
+          className="fa-solid fa-x signup-x"
+          onClick={() => {
+            setSignUpWindowBtn(false);
+          }}
+        ></i>
       </div>
     </div>
   );

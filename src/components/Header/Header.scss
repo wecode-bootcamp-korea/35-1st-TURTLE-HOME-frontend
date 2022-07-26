@@ -43,6 +43,9 @@
   }
 
   .right-container {
+    display: flex;
+    cursor: pointer;
+
     .page-link {
       margin-right: 15px;
 
