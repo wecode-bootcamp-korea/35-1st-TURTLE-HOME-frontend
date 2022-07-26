@@ -9,7 +9,7 @@ const MainCategory = () => {
   const navigate = useNavigate();
 
   const goToSubCategory = id => {
-    navigate(`/products:id`);
+    navigate(`/products`);
   };
 
   useEffect(() => {
