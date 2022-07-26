@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import './SubCategory.scss';
+import { API } from '../../components/Config/Config';
 
 const SubCategory = () => {
   const [products, setProducts] = useState([]);
@@ -25,23 +26,15 @@ const SubCategory = () => {
       `/products?sort_by=${inputValue.sort_by}&prices=${inputValue.prices}&size=${inputValue.size}`
     );
 
-    fetch(
-      `http://10.58.0.176:8000/products?sort_by=${sort_by}&prices=${prices}&size=${size}`
-    )
+    fetch(`${API.products}?sort_by=${sort_by}&prices=${prices}&size=${size}`)
       .then(res => res.json())
       .then(data => setProducts(data.result));
   };
 
-  // useEffect(() => {
-  //   fetch(`http://10.58.0.176:8000/products`)
-  //     .then(res => res.json())
-  //     .then(data => setProducts(data.result));
-  // }, []);
-
   useEffect(() => {
-    fetch(`/data/mock.json`)
+    fetch(`${API.products}`)
       .then(res => res.json())
-      .then(data => setProducts(data));
+      .then(data => setProducts(data.result));
   }, []);
 
   const openModal = () => {
@@ -57,12 +50,11 @@ const SubCategory = () => {
 
     navigate(`/products`);
 
-    fetch(`http://10.58.0.176:8000/products`)
+    fetch(`${API.products}`)
       .then(res => res.json())
       .then(data => setProducts(data.result));
   };
 
-  //---------분리-------------------
   const handleChange = e => {
     const { value, name } = e.target;
 
