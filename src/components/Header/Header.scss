@@ -46,6 +46,10 @@
     display: flex;
     cursor: pointer;
 
+    .display-none {
+      display: none;
+    }
+
     .page-link {
       margin-right: 15px;
 

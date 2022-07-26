@@ -14,6 +14,7 @@ const Header = () => {
   const [loginWindowBtn, setLoginWindowBtn] = useState(false);
   const [signUpWindowBtn, setSignUpWindowBtn] = useState(false);
 
+  const loginToken = localStorage.getItem('token');
   return (
     <>
       <header>
@@ -32,7 +33,7 @@ const Header = () => {
           </div>
           <div className="right-container">
             <div
-              className="page-link"
+              className={`page-link ${loginToken ? 'display-none' : 'null'}`}
               onClick={() => {
                 setLoginWindowBtn(true);
               }}
@@ -42,7 +43,9 @@ const Header = () => {
             </div>
             <div className="page-link">
               <FontAwesomeIcon icon={faBagShopping} className="icon" />
-              <span className="text">장바구니&nbsp;&nbsp;(0)</span>
+              <Link to="/cart">
+                <span className="text">장바구니&nbsp;&nbsp;(0)</span>
+              </Link>
             </div>
           </div>
         </div>
