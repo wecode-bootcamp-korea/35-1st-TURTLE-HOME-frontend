@@ -32,7 +32,7 @@ const Nav = () => {
       >
         <div className="logo-space"></div>
         <div className="nav-header">
-          <span className="header-copy">ZARAHOME+</span>
+          <span className="header-copy">TURTLEHOME+</span>
           <span>ABOUT</span>
           <span>CAMPAIGN</span>
           <span>COLLECTION</span>
