@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react';
 import './ProductDetail.scss';
 import '../../components/detailSize/detailSize';
 import DetailSize from '../../components/detailSize/detailSize';
+import { useParams } from 'react-router-dom';
 
 const ProductDetail = () => {
   const [data, setData] = useState({});
 
+  const params = useParams();
+
   useEffect(() => {
-    // fetch(`http://10.58.7.243:8000/products/${test}`);
-    // .then(data => setData(data.result));
-    fetch('./data/detail.json')
+    fetch(`http://10.58.7.243:8000/products/${params.current.id}`)
       .then(response => response.json())
       .then(data => setData(data.result));
+
+    //   .then(data => setData(data.result));
+    // fetch('./data/detail.json')
   }, []);
 
   const [minPrice, maxPrice] = [
