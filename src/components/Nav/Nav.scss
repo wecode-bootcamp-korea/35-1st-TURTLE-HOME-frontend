@@ -1,10 +1,17 @@
+.ham-menu {
+  position: absolute;
+  top: 42px;
+  left: 25px;
+  font-size: 26px;
+}
+
 .nav {
   width: 315px;
   height: 100%;
   padding: 20px;
-  overflow-y: hidden;
   transform: translateX(-260px);
   transition: all 0.4s ease-in-out;
+  overflow-y: hidden;
 
   span {
     display: block;
@@ -14,9 +21,10 @@
       opacity: 0.5;
     }
   }
-  a .logo-space {
+  .logo-space {
     height: 12%;
     background-color: transparent;
+    cursor: pointer;
   }
 
   .nav-header {
@@ -57,8 +65,9 @@
     }
 
     .main-sub-menus {
-      margin: 10px 0px 10px 12px;
-      font-size: 15px;
+      margin: 12px 0px 12px 12px;
+      font-size: 14px;
+      color: gray;
     }
   }
 

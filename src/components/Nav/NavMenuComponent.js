@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const NavMenuComponent = ({ element }) => {
-  const [subMenuOpen, setSubMenuOpen] = useState(false);
-
-  const subMenuToggle = () => {
-    setSubMenuOpen(prev => !prev);
-  };
+const NavMenuComponent = ({
+  element,
+  index,
+  subMenuOpenKey,
+  setSubMenuOpenKey,
+}) => {
   return (
     <div>
-      <span
-        className="main-menus"
-        onClick={() => {
-          subMenuToggle();
-        }}
-      >
-        {element.name}
-      </span>
-      {subMenuOpen
+      <Link to="./main">
+        <span
+          className="main-menus"
+          onClick={() => {
+            setSubMenuOpenKey(index);
+          }}
+        >
+          {element.name}
+        </span>
+      </Link>
+      {index === subMenuOpenKey
         ? element['category'].map((subElement, i) => {
             return (
-              <span key={i} className="main-sub-menus">
-                {subElement}
-              </span>
+              <Link to="./sub" key={i}>
+                <span className="main-sub-menus">{subElement}</span>
+              </Link>
             );
           })
         : ''}
