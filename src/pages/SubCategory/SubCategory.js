@@ -138,7 +138,7 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="prices"
-                        value="[0, 50000]"
+                        value="0to50000"
                         onChange={handleChange}
                       />
                       <label>0원 - 50,000원 미만</label>
@@ -156,7 +156,7 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="prices"
-                        value="50000to100000"
+                        value="100000to150000"
                         onChange={handleChange}
                       />
                       <label>100,000원 - 150,000원 미만</label>
@@ -165,7 +165,7 @@ const SubCategory = () => {
                       <input
                         type="radio"
                         name="prices"
-                        value="100000to200000"
+                        value="150000to200000"
                         onChange={handleChange}
                       />
                       <label>150,000원 - 200,000원 미만</label>
