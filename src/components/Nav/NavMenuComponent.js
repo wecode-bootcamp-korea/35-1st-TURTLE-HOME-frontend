@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const NavMenuComponent = ({
   element,
@@ -6,24 +6,35 @@ const NavMenuComponent = ({
   subMenuOpenKey,
   setSubMenuOpenKey,
 }) => {
+  const navigate = useNavigate();
+  const navigateToMenu = (index, to) => {
+    index === 0 && navigate(to);
+  };
+
   return (
     <div>
-      <Link to="./main">
-        <span
-          className="main-menus"
-          onClick={() => {
-            setSubMenuOpenKey(index);
-          }}
-        >
-          {element.name}
-        </span>
-      </Link>
+      <span
+        className="main-menus"
+        onClick={() => {
+          setSubMenuOpenKey(index);
+          navigateToMenu(index, './main');
+        }}
+      >
+        {element.name}
+      </span>
+
       {index === subMenuOpenKey
         ? element['category'].map((subElement, i) => {
             return (
-              <Link to="./sub" key={i}>
-                <span className="main-sub-menus">{subElement}</span>
-              </Link>
+              <span
+                key={i}
+                className="main-sub-menus"
+                onClick={() => {
+                  navigateToMenu(i, './sub');
+                }}
+              >
+                {subElement}
+              </span>
             );
           })
         : ''}
