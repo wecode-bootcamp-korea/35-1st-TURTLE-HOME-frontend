@@ -7,28 +7,27 @@ import './Cart.scss';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
-  const [orderNumber, setOrderNumber] = useState(products.quantity);
-  const [productPrice, setProductPrice] = useState();
+  const [totalProductPrice, setTotalProductPrice] = useState(0);
+
+  // useEffect(() => {
+  //   fetch('/data/cartMock.json', {
+  //     headers: {
+  //       Authorization: localStorage.getItem('token'),
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => setProducts(result));
+  // }, []);
 
   useEffect(() => {
     fetch(`${API.carts}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        quantity: orderNumber,
-      }),
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
     })
       .then(response => response.json())
-      .then(result => console.log('결과: ', result));
-  }, [orderNumber]);
-
-  // fetch('/data/cartMock.json', {
-  //   method: 'POST',
-  //   headers: {
-  //     Authorization: localStorage.getItem('token'),
-  //   },
-  // })
-  //   .then(res => res.json())
-  //   .then(data => setProducts(data));
+      .then(result => setProducts(result.results));
+  }, []);
 
   const deleteProduct = id => {
     fetch(`${API.carts}/${id}`, {
@@ -50,10 +49,9 @@ const Cart = () => {
           <CartProductList
             products={products}
             className="cart-product-list"
-            setProductPrice={setProductPrice}
-            orderNumber={orderNumber}
-            setOrderNumber={setOrderNumber}
+            setProducts={setProducts}
             deleteProduct={deleteProduct}
+            setTotalProductPrice={setTotalProductPrice}
           />
         </div>
         <div className="right-section">
@@ -62,11 +60,15 @@ const Cart = () => {
           <div className="cart-right-total">
             <div className="cart-small-total">
               <span>총 제품 : 세금 포함</span>
-              <span>{Number(productPrice).toLocaleString('ko-KR')} 원</span>
+              <span>
+                {Number(totalProductPrice).toLocaleString('ko-KR')} 원
+              </span>
             </div>
             <div className="cart-big-total">
               <span>합계 :</span>
-              <span>{Number(productPrice).toLocaleString('ko-KR')}* 원</span>
+              <span>
+                {Number(totalProductPrice).toLocaleString('ko-KR')}* 원
+              </span>
             </div>
           </div>
           <div className="cart-promotion-span">

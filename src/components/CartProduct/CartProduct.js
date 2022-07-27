@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../Config/Config';
 import './CartProduct.scss';
 
 const CartProduct = ({
@@ -7,22 +9,51 @@ const CartProduct = ({
   image_url,
   name,
   price,
-  orderNumber,
-  setOrderNumber,
   quantity,
+  setProducts,
   deleteProduct,
+  setTotalProductPrice,
 }) => {
   const navigate = useNavigate();
+
+  const [realNumber, setRealNumber] = useState(quantity);
+
+  const cartNumberFetch = () => {
+    fetch(`${API.carts}/${id}`, {
+      method: 'POST',
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+      body: {
+        quantity: realNumber,
+      },
+    })
+      .then(response => response.json())
+      .then(result => setProducts(result.results));
+  };
+
+  useEffect(() => {
+    totalPriceHandler();
+  }, []);
+
   const goToProductDetail = () => {
     navigate(`/products/${id}`);
   };
 
   const orderNumberMinus = () => {
-    orderNumber > 1 && setOrderNumber(prev => Number(prev) - 1);
+    realNumber > 1 && setRealNumber(prev => Number(prev) - 1);
+    cartNumberFetch();
   };
 
   const orderNumberPlus = () => {
-    setOrderNumber(prev => Number(prev) + 1);
+    setRealNumber(prev => Number(prev) + 1);
+    cartNumberFetch();
+  };
+
+  console.log('real', realNumber);
+
+  const totalPriceHandler = () => {
+    setTotalProductPrice(prev => prev + realNumber * price);
   };
 
   return (
@@ -43,7 +74,7 @@ const CartProduct = ({
           <span onClick={orderNumberMinus}>
             <i className="fa-solid fa-minus"></i>
           </span>
-          <div className="orderNumberCount">{orderNumber}</div>
+          <div className="orderNumberCount">{realNumber}</div>
           <span onClick={orderNumberPlus}>
             <i className="fa-solid fa-plus"></i>
           </span>

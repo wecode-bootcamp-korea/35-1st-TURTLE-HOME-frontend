@@ -5,19 +5,10 @@ import './CartProductList.scss';
 const CartProductList = ({
   products,
   className,
-  setProductPrice,
-  orderNumber,
-  setOrderNumber,
+  setProducts,
   deleteProduct,
+  setTotalProductPrice,
 }) => {
-  let totalPrice = 0;
-
-  products.forEach(element => {
-    totalPrice = `${Number(totalPrice) + Number(element.product_price)}`;
-  });
-
-  setProductPrice(totalPrice);
-
   return (
     <ul className={className}>
       {products.map(
@@ -31,9 +22,9 @@ const CartProductList = ({
             name={product_name}
             price={product_price}
             quantity={quantity}
-            orderNumber={orderNumber}
-            setOrderNumber={setOrderNumber}
+            setProducts={setProducts}
             deleteProduct={deleteProduct}
+            setTotalProductPrice={setTotalProductPrice}
           />
         )
       )}
