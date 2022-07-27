@@ -24,6 +24,13 @@
     .left-section {
       width: 75%;
       padding: 30px;
+      height: 800px;
+      overflow: scroll;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     .right-section {

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from '../../components/ProductList/ProductList';
+import CartProductList from '../../components/CartProductList/CartProductList';
 import './Cart.scss';
+
+//상품별 상품으로 갈 수 있는 링크 부여.
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
+  const [productCount, setProductCount] = useState();
+  const [productPrice, setProductPrice] = useState();
 
   useEffect(() => {
-    fetch('/data/mock.json')
+    fetch('/data/cartMock.json')
       .then(res => res.json())
       .then(data => setProducts(data));
   }, []);
@@ -19,7 +23,11 @@ const Cart = () => {
       </div>
       <div className="cart-main">
         <div className="left-section">
-          <ProductList products={products} className="cart-product-list" />
+          <CartProductList
+            products={products}
+            className="cart-product-list"
+            setProductPrice={setProductPrice}
+          />
         </div>
         <div className="right-section">
           <div className="cart-right-title">제품</div>
@@ -27,17 +35,24 @@ const Cart = () => {
           <div className="cart-right-total">
             <div className="cart-small-total">
               <span>총 제품 : 세금 포함</span>
-              <span>1,012,000원</span>
+              <span>{Number(productPrice).toLocaleString('ko-KR')} 원</span>
             </div>
             <div className="cart-big-total">
               <span>합계 :</span>
-              <span>1,012,000원*</span>
+              <span>{Number(productPrice).toLocaleString('ko-KR')}* 원</span>
             </div>
           </div>
           <div className="cart-promotion-span">
             프로모션 코드가 있으신가요? 나중에 결제 페이지에서 입력하십시오.
           </div>
-          <button className="cart-order">주문하기</button>
+          <button
+            className="cart-order"
+            onClick={() => {
+              alert('주문완료 !');
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
     </div>
