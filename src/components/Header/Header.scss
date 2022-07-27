@@ -12,16 +12,11 @@
 
   .left-container {
     @include flexContainer(center, center);
-
-    .ham-menu {
-      margin-right: 25px;
-      font-size: 26px;
-      cursor: pointer;
-    }
+    padding-left: 38px;
 
     h1 {
       font-size: 32px;
-      letter-spacing: 10px;
+      letter-spacing: 6px;
     }
   }
 

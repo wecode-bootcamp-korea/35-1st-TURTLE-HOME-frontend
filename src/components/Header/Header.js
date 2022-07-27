@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBars,
-  faUser,
-  faBagShopping,
-} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 
 const Header = () => {
@@ -13,7 +9,6 @@ const Header = () => {
     <header>
       <div className="header-wrapper">
         <div className="left-container">
-          <FontAwesomeIcon icon={faBars} className="ham-menu" />
           <h1>
             <Link to="/">TURTLE HOME</Link>
           </h1>
