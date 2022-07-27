@@ -263,5 +263,4 @@ const SubCategory = () => {
     </section>
   );
 };
-
 export default SubCategory;
