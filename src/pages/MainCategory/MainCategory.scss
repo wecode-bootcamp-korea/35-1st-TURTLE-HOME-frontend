@@ -1,0 +1,29 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/variables.scss';
+
+.category_box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  padding-top: 120px;
+
+  .category_list {
+    @include flexContainer(center, center);
+    position: relative;
+    float: left;
+    width: 25%;
+    cursor: pointer;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    p {
+      position: absolute;
+      color: #f0f0f0;
+      text-align: center;
+      font-size: 30px;
+    }
+  }
+}
