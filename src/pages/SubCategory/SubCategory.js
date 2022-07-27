@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import { API } from '../../components/Config/Config';
 import './SubCategory.scss';
+import Filterlist from '../../components/Filter/FilterList';
 
 const SubCategory = () => {
   const [products, setProducts] = useState([]);
@@ -94,9 +95,18 @@ const SubCategory = () => {
                 onClick={closeModal}
               />
             </div>
-            <div className="filter-list">
+            <form className="filter-list">
               <ul>
-                <li className="order">
+                {FILTER_LIST.map(({ id, filterTabTitle }) => {
+                  return (
+                    <Filterlist
+                      key={id}
+                      filterTabTitle={filterTabTitle}
+                      handleChange={handleChange()}
+                    />
+                  );
+                })}
+                {/* <li className="order">
                   <div className="filter-tab">
                     <span>종류</span>
                     <span>
@@ -233,7 +243,7 @@ const SubCategory = () => {
                       <label>킹</label>
                     </div>
                   </div>
-                </li>
+                </li> */}
               </ul>
               <div className="filter-footer">
                 <input
@@ -246,7 +256,7 @@ const SubCategory = () => {
                   적용
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -255,3 +265,18 @@ const SubCategory = () => {
   );
 };
 export default SubCategory;
+
+const FILTER_LIST = [
+  {
+    id: 1,
+    filterTabTitle: '종류',
+  },
+  {
+    id: 2,
+    filterTabTitle: '가격',
+  },
+  {
+    id: 3,
+    filterTabTitle: '사이즈',
+  },
+];
