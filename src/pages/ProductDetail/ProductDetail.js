@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import DetailSize from '../../components/detailSize/detailSize';
+import DetailSize from '../../components/DetailSize/DetailSize';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {

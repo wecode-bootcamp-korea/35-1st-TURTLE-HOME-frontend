@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import './detailSize.scss';
+import './DetailSize.scss';
 
 const DetailSize = ({
   index,
