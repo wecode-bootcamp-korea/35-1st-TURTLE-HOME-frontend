@@ -1,0 +1,37 @@
+[
+  {
+    "cart_id": 1,
+    "product_name": "(40S) 퍼케일 코튼 매트리스 커버",
+    "product_image": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/0105/088/055/0105088055_7_1_3.jpg?t=1658315297146&imformat=chrome",
+    "product_price": 111000,
+    "quantity": "1"
+  },
+  {
+    "cart_id": 2,
+    "product_name": "페이즐리 프린트 베개 커버",
+    "product_image": "https://static.zarahome.net/8/photos4/2022/V/4/1/p/1639/091/305/1639091305_2_7_5.jpg?t=1645020546407&imformat=chrome",
+    "product_price": 1141000,
+    "quantity": "2"
+  },
+  {
+    "cart_id": 3,
+    "product_name": "린넨 샤워 커튼",
+    "product_image": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/3329/032/052/3329032052_2_7_5.jpg?t=1646911384498&imformat=chrome",
+    "product_price": 521000,
+    "quantity": "5"
+  },
+  {
+    "cart_id": 4,
+    "product_name": "탭 탑 커튼",
+    "product_image": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/9821/032/052/9821032052_2_7_5.jpg?t=1658152148401&imformat=chrome",
+    "product_price": 291000,
+    "quantity": "1"
+  },
+  {
+    "cart_id": 5,
+    "product_name": "하이 GSM 린넨 커튼",
+    "product_image": "https://static.zarahome.net/8/photos4/2022/I/4/1/p/9372/032/710/9372032710_2_7_5.jpg?t=1654778349785&imformat=chrome",
+    "product_price": 121000,
+    "quantity": "2"
+  }
+]

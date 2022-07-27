@@ -18,8 +18,8 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/search" element={<Search />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/maincategory" element={<MainCategory />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
