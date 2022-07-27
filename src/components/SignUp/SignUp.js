@@ -4,7 +4,7 @@ import USERINPUT_DATA from './data/userInputData';
 import CHECKBOX_DATA from './data/checkboxData';
 import './SignUp.scss';
 
-const SignUp = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
+const SignUp = ({ handleLoginModal, handleSignUpModal }) => {
   const [signUpInput, setSignUpInput] = useState({
     korean_name: '',
     email: '',
@@ -43,19 +43,19 @@ const SignUp = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
   };
 
   return (
-    <div
-      className="signUp"
-      onClick={e => {
-        e.target.className === 'signUp' && setSignUpWindowBtn(false);
-      }}
-    >
-      <div className="container">
+    <div className="signUp" onClick={handleSignUpModal}>
+      <div
+        className="container"
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
         <div className="section">
           <div className="sign-header">
             <div
               onClick={() => {
-                setLoginWindowBtn(true);
-                setSignUpWindowBtn(false);
+                handleLoginModal();
+                handleSignUpModal();
               }}
             >
               <i class="fa-solid fa-angle-left"></i>
@@ -95,12 +95,7 @@ const SignUp = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
             <button>계정만들기</button>
           </form>
         </div>
-        <i
-          className="fa-solid fa-x signup-x"
-          onClick={() => {
-            setSignUpWindowBtn(false);
-          }}
-        ></i>
+        <i className="fa-solid fa-x signup-x" onClick={handleSignUpModal}></i>
       </div>
     </div>
   );

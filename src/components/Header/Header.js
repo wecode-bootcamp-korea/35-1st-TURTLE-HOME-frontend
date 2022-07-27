@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Login from '../Login/Login';
+import SignUp from '../SignUp/SignUp';
 import {
   faBars,
   faUser,
   faBagShopping,
 } from '@fortawesome/free-solid-svg-icons';
-import Login from '../Login/Login';
-import SignUp from '../SignUp/SignUp';
 import './Header.scss';
 
 const Header = () => {
   const [loginWindowBtn, setLoginWindowBtn] = useState(false);
   const [signUpWindowBtn, setSignUpWindowBtn] = useState(false);
+
+  const handleLoginModal = () => {
+    setLoginWindowBtn(prev => !prev);
+  };
+
+  const handleSignUpModal = () => {
+    setSignUpWindowBtn(prev => !prev);
+  };
 
   const loginToken = localStorage.getItem('token');
   return (
@@ -34,9 +42,7 @@ const Header = () => {
           <div className="right-container">
             <div
               className={`page-link ${loginToken ? 'display-none' : 'null'}`}
-              onClick={() => {
-                setLoginWindowBtn(true);
-              }}
+              onClick={handleLoginModal}
             >
               <FontAwesomeIcon icon={faUser} className="icon" />
               <span className="text">로그인</span>
@@ -52,14 +58,14 @@ const Header = () => {
       </header>
       {loginWindowBtn ? (
         <Login
-          setLoginWindowBtn={setLoginWindowBtn}
-          setSignUpWindowBtn={setSignUpWindowBtn}
+          handleLoginModal={handleLoginModal}
+          handleSignUpModal={handleSignUpModal}
         />
       ) : null}
       {signUpWindowBtn ? (
         <SignUp
-          setLoginWindowBtn={setLoginWindowBtn}
-          setSignUpWindowBtn={setSignUpWindowBtn}
+          handleLoginModal={handleLoginModal}
+          handleSignUpModal={handleSignUpModal}
         />
       ) : null}
     </>

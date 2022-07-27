@@ -2,7 +2,7 @@ import { useState } from 'react';
 import UserInput from '../UserInput/UserInput';
 import './Login.scss';
 
-const Login = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
+const Login = ({ handleLoginModal, handleSignUpModal }) => {
   const [loginInput, setLoginInput] = useState({
     email: '',
     password: '',
@@ -31,13 +31,13 @@ const Login = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
   };
 
   return (
-    <div
-      className="login"
-      onClick={e => {
-        e.target.className === 'login' && setLoginWindowBtn(false);
-      }}
-    >
-      <div className="container">
+    <div className="login" onClick={handleLoginModal}>
+      <div
+        className="container"
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
         <div className="section-left">
           <div className="login-header">
             <span className="left-section-header">로그인</span>
@@ -80,28 +80,13 @@ const Login = ({ setLoginWindowBtn, setSignUpWindowBtn }) => {
         </div>
         <div className="section-right">
           <span className="right-section-header">회원 가입</span>
-          <div
-            onClick={() => {
-              setSignUpWindowBtn(true);
-            }}
-            className="login-signin-link"
-          >
-            <button
-              className="login-signin"
-              onClick={() => {
-                setLoginWindowBtn(false);
-              }}
-            >
+          <div onClick={handleSignUpModal} className="login-signin-link">
+            <button className="login-signin" onClick={handleLoginModal}>
               계정 만들기
             </button>
           </div>
         </div>
-        <i
-          className="fa-solid fa-x"
-          onClick={() => {
-            setLoginWindowBtn(false);
-          }}
-        ></i>
+        <i className="fa-solid fa-x" onClick={handleLoginModal}></i>
       </div>
     </div>
   );
