@@ -9,12 +9,13 @@ const ProductDetail = () => {
   const params = useParams();
 
   useEffect(() => {
-    fetch('./data/detail.json')
-      // fetch(`http://10.58.7.243:8000/products/${params.id}`)
+    fetch(`http://10.58.7.3:8000/products/${params.id}`)
       .then(response => response.json())
       .then(data => setData(data.result));
-  }, []);
-  // }, [params.id]);
+  }, [params.id]);
+
+  // fetch('./data/detail.json')
+  // }, []);
 
   const addCommaToPrice = price => {
     return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
@@ -29,17 +30,19 @@ const ProductDetail = () => {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalNumber, setTotalNumber] = useState(0);
+  const [sizeId, setSizeId] = useState('');
 
-  const token = localStorage.getItem('token');
+  const token2 = localStorage.getItem('token');
 
   const cartFetch = () => {
-    fetch(`http://10.58.4.113:8000/carts/cart`, {
+    fetch(`http://10.58.7.224:8000/carts`, {
       method: 'POST',
       headers: {
-        Authorization: token,
+        Authorization: token2,
       },
       body: JSON.stringify({
-        product_option_id: params.id,
+        product_id: 5,
+        size_id: sizeId,
         quantity: totalNumber,
       }),
     })
@@ -77,6 +80,8 @@ const ProductDetail = () => {
                   setTotalNumber={setTotalNumber}
                   setTotalPrice={setTotalPrice}
                   addCommaToPrice={addCommaToPrice}
+                  elementSizeId={element.size_id}
+                  setSizeId={setSizeId}
                 />
               );
             })}

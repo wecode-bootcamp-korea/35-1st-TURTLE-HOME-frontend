@@ -20,7 +20,7 @@ const Login = () => {
 
   const loginFetch = e => {
     e.preventDefault();
-    fetch('http://10.58.2.101:8000/users/signin', {
+    fetch('http://10.58.7.224:8000/users/signin', {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -28,7 +28,7 @@ const Login = () => {
       }),
     })
       .then(res => res.json())
-      .then(data => console.log(data.access_token));
+      .then(data => localStorage.setItem('token', data.access_token));
   };
 
   return (

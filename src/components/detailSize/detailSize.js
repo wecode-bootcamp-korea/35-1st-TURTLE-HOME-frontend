@@ -10,6 +10,8 @@ const DetailSize = ({
   setTotalPrice,
   setTotalNumber,
   addCommaToPrice,
+  elementSizeId,
+  setSizeId,
 }) => {
   const [sizeComponentHover, setSizeComponentHover] = useState(false);
   const sizeComponentHoverHandler = () => {
@@ -31,8 +33,6 @@ const DetailSize = ({
     setTotalPrice(orderNumber.current * price);
   };
 
-  console.log(orderNumber);
-
   return (
     <div
       className={`size-component
@@ -44,10 +44,11 @@ const DetailSize = ({
         setSelectedComponentNumber(index);
         setTotalNumber(orderNumber.current);
         totalPriceChange();
+        setSizeId(elementSizeId);
       }}
     >
       <div className="size-left">
-        <span className="size-korean">{size}</span>
+        <span className="size-korean">{size.toUpperCase()}</span>
       </div>
       <span
         className={`
