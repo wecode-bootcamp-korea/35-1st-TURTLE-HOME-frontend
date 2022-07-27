@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import CartProductList from '../../components/CartProductList/CartProductList';
+import { API } from '../../components/Config/Config';
 import './Cart.scss';
 
 //상품별 상품으로 갈 수 있는 링크 부여.
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
-  const [productCount, setProductCount] = useState();
   const [productPrice, setProductPrice] = useState();
 
   useEffect(() => {
-    fetch('/data/cartMock.json')
+    fetch(`${API.carts}`)
       .then(res => res.json())
       .then(data => setProducts(data));
   }, []);
+
+  const deleteProduct = id => {
+    fetch(`${API.carts}/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: localStorage.getItem('token') },
+    }).then(res => res.json());
+
+    setProducts(products.filter(product => product.cart_id !== id));
+  };
 
   return (
     <div className="cart">
@@ -27,6 +36,7 @@ const Cart = () => {
             products={products}
             className="cart-product-list"
             setProductPrice={setProductPrice}
+            deleteProduct={deleteProduct}
           />
         </div>
         <div className="right-section">
