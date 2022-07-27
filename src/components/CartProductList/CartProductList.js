@@ -2,7 +2,13 @@ import React from 'react';
 import CartProduct from '../CartProduct/CartProduct';
 import './CartProductList.scss';
 
-const CartProductList = ({ products, className, setProductPrice }) => {
+const CartProductList = ({
+  products,
+  className,
+  setProductPrice,
+  orderNumber,
+  setOrderNumber,
+}) => {
   const productClassName = () => {
     if (className === 'product-list') {
       return 'product-item';
@@ -33,6 +39,8 @@ const CartProductList = ({ products, className, setProductPrice }) => {
             name={product_name}
             price={product_price}
             quantity={quantity}
+            orderNumber={orderNumber}
+            setOrderNumber={setOrderNumber}
           />
         )
       )}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CartProduct.scss';
 
@@ -8,7 +7,8 @@ const CartProduct = ({
   image_url,
   name,
   price,
-  quantity,
+  orderNumber,
+  setOrderNumber,
 }) => {
   const navigate = useNavigate();
   const goToProductDetail = () => {
@@ -16,10 +16,10 @@ const CartProduct = ({
   };
 
   const orderNumberMinus = () => {
-    quantity > 1 && quantity--;
+    orderNumber > 1 && setOrderNumber(prev => Number(prev) - 1);
   };
   const orderNumberPlus = () => {
-    quantity.current = quantity.current + 1;
+    setOrderNumber(prev => Number(prev) + 1);
   };
 
   return (
@@ -37,7 +37,7 @@ const CartProduct = ({
           <span onClick={orderNumberMinus}>
             <i className="fa-solid fa-minus"></i>
           </span>
-          <div className="orderNumberCount">{quantity}</div>
+          <div className="orderNumberCount">{orderNumber}</div>
           <span onClick={orderNumberPlus}>
             <i className="fa-solid fa-plus"></i>
           </span>

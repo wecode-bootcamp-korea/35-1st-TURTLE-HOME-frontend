@@ -6,14 +6,28 @@ import './Cart.scss';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
-  const [productCount, setProductCount] = useState();
+  const [orderNumber, setOrderNumber] = useState(products.quantity);
   const [productPrice, setProductPrice] = useState();
 
   useEffect(() => {
-    fetch('/data/cartMock.json')
-      .then(res => res.json())
-      .then(data => setProducts(data));
-  }, []);
+    fetch('API 주소', {
+      method: 'POST',
+      body: JSON.stringify({
+        quantity: orderNumber,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => console.log('결과: ', result));
+  }, [orderNumber]);
+
+  // fetch('/data/cartMock.json', {
+  //   method: 'POST',
+  //   headers: {
+  //     Authorization: localStorage.getItem('token'),
+  //   },
+  // })
+  //   .then(res => res.json())
+  //   .then(data => setProducts(data));
 
   return (
     <div className="cart">
@@ -27,6 +41,8 @@ const Cart = () => {
             products={products}
             className="cart-product-list"
             setProductPrice={setProductPrice}
+            orderNumber={orderNumber}
+            setOrderNumber={setOrderNumber}
           />
         </div>
         <div className="right-section">
