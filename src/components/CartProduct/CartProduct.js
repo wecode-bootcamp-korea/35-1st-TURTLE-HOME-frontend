@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../Config/Config';
 import './CartProduct.scss';
@@ -16,6 +16,8 @@ const CartProduct = ({
 }) => {
   const navigate = useNavigate();
 
+  const newNumber = useRef(quantity);
+
   const [realNumber, setRealNumber] = useState(quantity);
 
   const cartNumberFetch = () => {
@@ -24,7 +26,7 @@ const CartProduct = ({
       headers: {
         Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({ quantity: realNumber }),
+      body: JSON.stringify({ quantity: newNumber.current }),
     })
       .then(response => response.json())
       .then(result => console.log(result));
@@ -32,7 +34,7 @@ const CartProduct = ({
 
   useEffect(() => {
     totalPriceHandler();
-  }, [realNumber]);
+  }, [newNumber]);
 
   const goToProductDetail = () => {
     navigate(`/products/${id}`);
@@ -40,7 +42,8 @@ const CartProduct = ({
 
   const orderNumberMinus = () => {
     if (realNumber > 1) {
-      setRealNumber(prev => Number(prev) - 1);
+      newNumber.current = newNumber.current - 1;
+      setRealNumber(newNumber.current);
       setTotalProductPrice(prev => prev - realNumber * price);
       cartNumberFetch();
     } else {
@@ -49,7 +52,8 @@ const CartProduct = ({
   };
 
   const orderNumberPlus = () => {
-    setRealNumber(prev => Number(prev) + 1);
+    newNumber.current = newNumber.current + 1;
+    setRealNumber(newNumber.current);
     setTotalProductPrice(prev => prev + realNumber * price);
     cartNumberFetch();
   };
@@ -78,7 +82,7 @@ const CartProduct = ({
           <span onClick={orderNumberMinus}>
             <i className="fa-solid fa-minus"></i>
           </span>
-          <div className="orderNumberCount">{realNumber}</div>
+          <div className="orderNumberCount">{newNumber.current}</div>
           <span onClick={orderNumberPlus}>
             <i className="fa-solid fa-plus"></i>
           </span>
