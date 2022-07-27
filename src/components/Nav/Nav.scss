@@ -1,25 +1,22 @@
-.logo-space {
-  background-color: transparent;
-
-  .ham-menu {
-    position: fixed;
-    top: 62px;
-    left: 30px;
-    font-size: 26px;
-    z-index: 3000;
-    cursor: pointer;
-  }
+.fa-bars {
+  position: fixed;
+  top: 42px;
+  left: 20px;
+  font-size: 26px;
+  z-index: 3000;
+  cursor: pointer;
 }
 
 .nav {
   position: fixed;
-  width: 330px;
+  width: 370px;
   height: 100%;
   padding: 20px 20px 20px 0;
-  transform: translateX(-305px);
+  transform: translateX(-367px);
   transition: all 0.4s ease-in-out;
   overflow-y: hidden;
   z-index: 10;
+  background-color: white;
 
   .nav-container {
     margin-top: 100px;

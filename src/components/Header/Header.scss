@@ -12,11 +12,11 @@
 
   .left-container {
     @include flexContainer(center, center);
-    padding-left: 50px;
+    padding-left: 38px;
 
     h1 {
       font-size: 32px;
-      letter-spacing: 10px;
+      letter-spacing: 6px;
     }
   }
 

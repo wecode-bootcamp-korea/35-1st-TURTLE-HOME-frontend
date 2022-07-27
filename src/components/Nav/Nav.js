@@ -18,20 +18,6 @@ const Nav = () => {
 
   return (
     <>
-      <div className="logo-space">
-        <div className="ham-menu">
-          <i
-            class="fa-solid fa-bars"
-            onMouseOver={() => {
-              setNavSlide(true);
-            }}
-            onMouseLeave={() => {
-              setNavSlide(false);
-            }}
-          ></i>
-        </div>
-      </div>
-
       <div
         className={navSlide ? 'nav nav-transformer' : 'nav'}
         onMouseOver={() => {
@@ -41,6 +27,7 @@ const Nav = () => {
           setNavSlide(false);
         }}
       >
+        <div className="logo-space"></div>
         <div className="nav-container">
           <div className="nav-header">
             <span className="header-copy">TURTLEHOME+</span>
@@ -80,6 +67,16 @@ const Nav = () => {
           </div>
         </div>
       </div>
+
+      <i
+        class="fa-solid fa-bars"
+        onMouseOver={() => {
+          setNavSlide(true);
+        }}
+        onMouseLeave={() => {
+          setNavSlide(false);
+        }}
+      ></i>
     </>
   );
 };
