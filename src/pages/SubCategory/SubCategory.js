@@ -94,7 +94,7 @@ const SubCategory = () => {
                 onClick={closeModal}
               />
             </div>
-            <form className="filter-list">
+            <div className="filter-list">
               <ul>
                 <li className="order">
                   <div className="filter-tab">
@@ -246,7 +246,7 @@ const SubCategory = () => {
                   적용
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

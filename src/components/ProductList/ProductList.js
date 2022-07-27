@@ -8,7 +8,7 @@ const ProductList = ({ products, className }) => {
 
   return (
     <ul className={className}>
-      {products.map(({ id, image_url, name, prices }) => (
+      {products.map(({ id, image_url, name, min_price, max_price }) => (
         <Product
           key={id}
           id={id}
@@ -16,7 +16,8 @@ const ProductList = ({ products, className }) => {
           image_url={image_url}
           alt={name}
           name={name}
-          prices={prices}
+          min_price={min_price}
+          max_price={max_price}
         />
       ))}
     </ul>

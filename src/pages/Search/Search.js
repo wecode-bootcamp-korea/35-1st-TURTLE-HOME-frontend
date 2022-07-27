@@ -14,7 +14,7 @@ const Search = () => {
   useEffect(() => {
     fetch(`${API.products}`)
       .then(res => res.json())
-      .then(data => setProducts(data));
+      .then(data => setProducts(data.result));
   }, []);
 
   const handleChange = e => {

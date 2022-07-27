@@ -90,34 +90,21 @@
             flex-direction: column;
             gap: 30px;
             padding: 25px;
-            font-size: 13px;
             color: rgb(153, 151, 151);
+            font-size: 13px;
 
             .option {
               @include flexContainer(center, space-between);
               gap: 12px;
 
               input[type='radio'] {
-                accent-color: $var-gray;
                 width: 20px;
                 height: 20px;
+                accent-color: $var-gray;
                 cursor: pointer;
 
                 &:checked {
                   accent-color: $var-black;
-                }
-              }
-
-              input[type='checkbox'] {
-                width: 20px;
-                height: 20px;
-                border: 1px solid $var-gray;
-                appearance: none;
-                border-radius: 50%;
-                cursor: pointer;
-
-                &:checked {
-                  background: $var-black;
                 }
               }
             }
