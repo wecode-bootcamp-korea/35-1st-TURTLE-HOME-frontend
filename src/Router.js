@@ -8,11 +8,13 @@ import Login from './pages/Login/Login';
 import SubCategory from './pages/SubCategory/SubCategory';
 import MainCategory from './pages/MainCategory/MainCategory';
 import SignUp from './pages/SignUp/SignUp';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Header />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Intro />} />
         <Route path="/login" element={<Login />} />

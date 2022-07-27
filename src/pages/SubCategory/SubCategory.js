@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
-import './SubCategory.scss';
 import { API } from '../../components/Config/Config';
+import './SubCategory.scss';
 
 const SubCategory = () => {
   const [products, setProducts] = useState([]);
@@ -13,58 +13,13 @@ const SubCategory = () => {
     size: '',
   });
 
-  // const [searchParams] = useSearchParams();
-
-  // const sort_by = searchParams.get('sort_by');
-  // const size = searchParams.get('size');
-  // const min_price = searchParams.get('min_price');
-  // const max_price = searchParams.get('max_price');
-
-  const min =
-    inputValue.prices.split('to')[0] !== ''
-      ? inputValue.prices.split('to')[0]
-      : null;
-  const max =
-    inputValue.prices.split('to')[1] !== undefined
-      ? inputValue.prices.split('to')[1]
-      : null;
-
   const location = useLocation();
-  const navigate = useNavigate();
 
-  const applyFilter = () => {
-    navigate(
-      `/products?sort_by=${inputValue.sort_by}&min_price=${min}&max_price=${max}&size=${inputValue.size}`
-    );
-
+  useEffect(() => {
     fetch(`${API.products}${location.search}`)
       .then(res => res.json())
       .then(data => setProducts(data.result));
-  };
-
-  useEffect(() => {
-    fetch(`${API.products}`)
-      .then(res => res.json())
-      .then(data => setProducts(data.result));
-  }, []);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  const optionReset = () => {
-    setInputValue({ sort_by: '', prices: '', size: '' });
-
-    navigate(`/products`);
-
-    fetch(`${API.products}`)
-      .then(res => res.json())
-      .then(data => setProducts(data.result));
-  };
+  }, [location]);
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -75,10 +30,46 @@ const SubCategory = () => {
     });
   };
 
-  // console.log('min, max', min, max);
-  // console.log('location.search', location.search);
-  // console.log('inputValue', inputValue);
-  // console.log('inputValue.prices.split', inputValue.prices.split('to'));
+  const min =
+    inputValue.prices.split('to')[0] !== ''
+      ? inputValue.prices.split('to')[0]
+      : '';
+  const max =
+    inputValue.prices.split('to')[1] !== undefined
+      ? inputValue.prices.split('to')[1]
+      : '';
+
+  const navigate = useNavigate();
+
+  const applyFilter = () => {
+    const sort_by = inputValue.sort_by && '&sort_by=';
+    const min_price = min && '&min_price=';
+    const max_price = max && '&max_price=';
+    const size = inputValue.size && '&size=';
+
+    navigate(
+      `/products?${sort_by}${inputValue.sort_by}${min_price}${min}${max_price}${max}${size}${inputValue.size}`
+    );
+  };
+
+  const optionReset = () => {
+    setInputValue({ sort_by: '', prices: '', size: '' });
+    navigate(`/products`);
+  };
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  console.log(products);
+  console.log('min', min, 'max', max);
+  console.log('location.search', location.search);
+  console.log('inputValue', inputValue);
+  console.log('[최소, 최대]', inputValue.prices.split('to'));
 
   return (
     <section className="products">
