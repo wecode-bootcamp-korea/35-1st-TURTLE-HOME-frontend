@@ -3,14 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import { API } from '../../components/Config/Config';
 import './SubCategory.scss';
-import Filterlist from '../../components/Filter/FilterList';
 
 const SubCategory = () => {
   const [products, setProducts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState({
     sort_by: '',
-    prices: '',
+    rangeId: '',
     size: '',
   });
 
@@ -31,30 +30,24 @@ const SubCategory = () => {
     });
   };
 
-  const min =
-    inputValue.prices.split('to')[0] !== ''
-      ? inputValue.prices.split('to')[0]
-      : '';
-  const max =
-    inputValue.prices.split('to')[1] !== undefined
-      ? inputValue.prices.split('to')[1]
-      : '';
+  const min = inputValue.rangeId ? inputValue.rangeId * 50000 : '';
+  const max = min === 200000 || min === '' ? 0 : min + 50000;
+
+  const sort_by = inputValue.sort_by && '&sort_by=';
+  const min_price = min === '' ? '' : `&min_price=${min}`;
+  const max_price = max === 0 ? '' : `&max_price=${max}`;
+  const size = inputValue.size && '&size=';
 
   const navigate = useNavigate();
 
   const applyFilter = () => {
-    const sort_by = inputValue.sort_by && '&sort_by=';
-    const min_price = min && '&min_price=';
-    const max_price = max && '&max_price=';
-    const size = inputValue.size && '&size=';
-
     navigate(
-      `/products?${sort_by}${inputValue.sort_by}${min_price}${min}${max_price}${max}${size}${inputValue.size}`
+      `/products?${sort_by}${inputValue.sort_by}${min_price}${max_price}${size}${inputValue.size}`
     );
   };
 
   const optionReset = () => {
-    setInputValue({ sort_by: '', prices: '', size: '' });
+    setInputValue({ sort_by: '', rangeId: '', size: '' });
     navigate(`/products`);
   };
 
@@ -66,12 +59,6 @@ const SubCategory = () => {
     setModalOpen(false);
   };
 
-  console.log(products);
-  console.log('min', min, 'max', max);
-  console.log('location.search', location.search);
-  console.log('inputValue', inputValue);
-  console.log('[최소, 최대]', inputValue.prices.split('to'));
-
   return (
     <section className="products">
       <div className="side">
@@ -81,7 +68,6 @@ const SubCategory = () => {
           필터
         </div>
       </div>
-      {/* 필터 모달 */}
       <div className="filter-modal">
         <div className={modalOpen && 'filter-backdrop'}>
           <div
@@ -95,18 +81,9 @@ const SubCategory = () => {
                 onClick={closeModal}
               />
             </div>
-            <form className="filter-list">
+            <div className="filter-list">
               <ul>
-                {FILTER_LIST.map(({ id, filterTabTitle }) => {
-                  return (
-                    <Filterlist
-                      key={id}
-                      filterTabTitle={filterTabTitle}
-                      handleChange={handleChange()}
-                    />
-                  );
-                })}
-                {/* <li className="order">
+                <li className="order">
                   <div className="filter-tab">
                     <span>종류</span>
                     <span>
@@ -114,33 +91,19 @@ const SubCategory = () => {
                     </span>
                   </div>
                   <div className="options">
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="sort_by"
-                        value="low_price"
-                        onChange={handleChange}
-                      />
-                      <label>낮은 가격순</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="sort_by"
-                        value="high_price"
-                        onChange={handleChange}
-                      />
-                      <label>높은 가격순</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="sort_by"
-                        value="newest"
-                        onChange={handleChange}
-                      />
-                      <label>신상품</label>
-                    </div>
+                    {ORDER_FILTER_LIST.map(list => {
+                      return (
+                        <div className="option" key={list.id}>
+                          <input
+                            type="radio"
+                            name="sort_by"
+                            value={list.value}
+                            onChange={handleChange}
+                          />
+                          <label>{list.title}</label>
+                        </div>
+                      );
+                    })}
                   </div>
                 </li>
                 <li className="price">
@@ -151,51 +114,19 @@ const SubCategory = () => {
                     </span>
                   </div>
                   <div className="options">
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="prices"
-                        value="0to50000"
-                        onChange={handleChange}
-                      />
-                      <label>0원 - 50,000원 미만</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="prices"
-                        value="50000to100000"
-                        onChange={handleChange}
-                      />
-                      <label>50,000원 - 100,000원 미만</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="prices"
-                        value="100000to150000"
-                        onChange={handleChange}
-                      />
-                      <label>100,000원 - 150,000원 미만</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="prices"
-                        value="150000to200000"
-                        onChange={handleChange}
-                      />
-                      <label>150,000원 - 200,000원 미만</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="prices"
-                        value="200000"
-                        onChange={handleChange}
-                      />
-                      <label>200,000원 이상</label>
-                    </div>
+                    {PRICE_FILTER_LIST.map(list => {
+                      return (
+                        <div className="option" key={list.id}>
+                          <input
+                            type="radio"
+                            name="rangeId"
+                            value={list.id}
+                            onChange={handleChange}
+                          />
+                          <label>{list.title}</label>
+                        </div>
+                      );
+                    })}
                   </div>
                 </li>
                 <li className="size">
@@ -206,44 +137,21 @@ const SubCategory = () => {
                     </span>
                   </div>
                   <div className="options">
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="size"
-                        value="single"
-                        onChange={handleChange}
-                      />
-                      <label>싱글</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="size"
-                        value="double"
-                        onChange={handleChange}
-                      />
-                      <label>더블</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="size"
-                        value="queen"
-                        onChange={handleChange}
-                      />
-                      <label>퀸</label>
-                    </div>
-                    <div className="option">
-                      <input
-                        type="radio"
-                        name="size"
-                        value="king"
-                        onChange={handleChange}
-                      />
-                      <label>킹</label>
-                    </div>
+                    {SIZE_FILTER_LIST.map(list => {
+                      return (
+                        <div className="option" key={list.id}>
+                          <input
+                            type="radio"
+                            name="size"
+                            value={list.value}
+                            onChange={handleChange}
+                          />
+                          <label>{list.title}</label>
+                        </div>
+                      );
+                    })}
                   </div>
-                </li> */}
+                </li>
               </ul>
               <div className="filter-footer">
                 <input
@@ -256,27 +164,33 @@ const SubCategory = () => {
                   적용
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-      <ProductList products={products} className="product-list" />
+      <ProductList products={products} productClassName="product-list" />
     </section>
   );
 };
 export default SubCategory;
 
-const FILTER_LIST = [
-  {
-    id: 1,
-    filterTabTitle: '종류',
-  },
-  {
-    id: 2,
-    filterTabTitle: '가격',
-  },
-  {
-    id: 3,
-    filterTabTitle: '사이즈',
-  },
+const ORDER_FILTER_LIST = [
+  { id: 0, value: 'low_price', title: '낮은 가격순' },
+  { id: 1, value: 'high_price', title: '높은 가격순' },
+  { id: 2, value: 'newest', title: '신상품순' },
+];
+
+const PRICE_FILTER_LIST = [
+  { id: 0, title: '0원 - 50,000원 미만' },
+  { id: 1, title: '50,000원 - 100,000원 미만' },
+  { id: 2, title: '100,000원 - 150,000원 미만' },
+  { id: 3, title: '150,000원 - 200,000원 미만' },
+  { id: 4, title: '200,000원 이상' },
+];
+
+const SIZE_FILTER_LIST = [
+  { id: 0, value: 'single', title: '싱글' },
+  { id: 1, value: 'double', title: '더블' },
+  { id: 2, value: 'queen', title: '퀸' },
+  { id: 3, value: 'king', title: '킹' },
 ];

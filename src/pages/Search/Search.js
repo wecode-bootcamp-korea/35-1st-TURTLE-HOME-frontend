@@ -50,7 +50,7 @@ const Search = () => {
       ) : (
         <ProductList
           products={filteringProducts}
-          className="search-product-list"
+          productClassName="search-product-list"
         />
       )}
     </main>
