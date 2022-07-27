@@ -7,6 +7,7 @@ import Search from './pages/Search/Search';
 import Login from './pages/Login/Login';
 import MainCategory from './pages/MainCategory/MainCategory';
 import SignUp from './pages/SignUp/SignUp';
+import Cart from './pages/Cart/Cart';
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/search" element={<Search />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/maincategory" element={<MainCategory />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
