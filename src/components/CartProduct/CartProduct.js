@@ -20,33 +20,37 @@ const CartProduct = ({
 
   const cartNumberFetch = () => {
     fetch(`${API.carts}/${id}`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('token'),
       },
-      body: {
-        quantity: realNumber,
-      },
+      body: JSON.stringify({ quantity: realNumber }),
     })
       .then(response => response.json())
-      .then(result => setProducts(result.results));
+      .then(result => console.log(result));
   };
 
   useEffect(() => {
     totalPriceHandler();
-  }, []);
+  }, [realNumber]);
 
   const goToProductDetail = () => {
     navigate(`/products/${id}`);
   };
 
   const orderNumberMinus = () => {
-    realNumber > 1 && setRealNumber(prev => Number(prev) - 1);
-    cartNumberFetch();
+    if (realNumber > 1) {
+      setRealNumber(prev => Number(prev) - 1);
+      setTotalProductPrice(prev => prev - realNumber * price);
+      cartNumberFetch();
+    } else {
+      return;
+    }
   };
 
   const orderNumberPlus = () => {
     setRealNumber(prev => Number(prev) + 1);
+    setTotalProductPrice(prev => prev + realNumber * price);
     cartNumberFetch();
   };
 
