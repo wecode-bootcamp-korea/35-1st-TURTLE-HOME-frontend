@@ -8,22 +8,14 @@ const CartProductList = ({
   setProductPrice,
   orderNumber,
   setOrderNumber,
+  deleteProduct,
 }) => {
-  const productClassName = () => {
-    if (className === 'product-list') {
-      return 'product-item';
-    } else if (className === 'search-product-list') {
-      return 'search-product-item';
-    } else if (className === 'cart-product-list') {
-      return 'cart-product-item';
-    }
-  };
-
   let totalPrice = 0;
 
   products.forEach(element => {
     totalPrice = `${Number(totalPrice) + Number(element.product_price)}`;
   });
+
   setProductPrice(totalPrice);
 
   return (
@@ -33,7 +25,7 @@ const CartProductList = ({
           <CartProduct
             key={cart_id}
             id={cart_id}
-            productClassName={productClassName()}
+            productClassName="cart-product-item"
             image_url={product_image}
             alt={product_name}
             name={product_name}
@@ -41,6 +33,7 @@ const CartProductList = ({
             quantity={quantity}
             orderNumber={orderNumber}
             setOrderNumber={setOrderNumber}
+            deleteProduct={deleteProduct}
           />
         )
       )}

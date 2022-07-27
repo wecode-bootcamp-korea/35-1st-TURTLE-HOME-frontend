@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CartProductList from '../../components/CartProductList/CartProductList';
+import { API } from '../../components/Config/Config';
 import './Cart.scss';
 
 //상품별 상품으로 갈 수 있는 링크 부여.
@@ -10,7 +11,7 @@ const Cart = () => {
   const [productPrice, setProductPrice] = useState();
 
   useEffect(() => {
-    fetch('API 주소', {
+    fetch(`${API.carts}`, {
       method: 'POST',
       body: JSON.stringify({
         quantity: orderNumber,
@@ -29,6 +30,15 @@ const Cart = () => {
   //   .then(res => res.json())
   //   .then(data => setProducts(data));
 
+  const deleteProduct = id => {
+    fetch(`${API.carts}/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: localStorage.getItem('token') },
+    }).then(res => res.json());
+
+    setProducts(products.filter(product => product.cart_id !== id));
+  };
+
   return (
     <div className="cart">
       <div className="cart-header">
@@ -43,6 +53,7 @@ const Cart = () => {
             setProductPrice={setProductPrice}
             orderNumber={orderNumber}
             setOrderNumber={setOrderNumber}
+            deleteProduct={deleteProduct}
           />
         </div>
         <div className="right-section">

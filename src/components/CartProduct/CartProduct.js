@@ -9,6 +9,8 @@ const CartProduct = ({
   price,
   orderNumber,
   setOrderNumber,
+  quantity,
+  deleteProduct,
 }) => {
   const navigate = useNavigate();
   const goToProductDetail = () => {
@@ -18,14 +20,18 @@ const CartProduct = ({
   const orderNumberMinus = () => {
     orderNumber > 1 && setOrderNumber(prev => Number(prev) - 1);
   };
+
   const orderNumberPlus = () => {
     setOrderNumber(prev => Number(prev) + 1);
   };
 
   return (
     <li className={productClassName}>
-      <div className="product-img" onClick={goToProductDetail}>
-        <img src={image_url} alt={name} />
+      <div className="product-img">
+        <img src={image_url} alt={name} onClick={goToProductDetail} />
+        <div className="delete" onClick={() => deleteProduct(id)}>
+          <i className="fa-solid fa-xmark"></i>
+        </div>
       </div>
       <div className="product-detail">
         <div className="product-info">
