@@ -1,0 +1,99 @@
+.fa-bars {
+  position: fixed;
+  top: 42px;
+  left: 20px;
+  font-size: 26px;
+  z-index: 3000;
+  cursor: pointer;
+}
+
+.nav {
+  position: fixed;
+  width: 370px;
+  height: 100%;
+  padding: 20px 20px 20px 0;
+  transform: translateX(-367px);
+  transition: all 0.4s ease-in-out;
+  overflow-y: hidden;
+  z-index: 10;
+  background-color: white;
+
+  .nav-container {
+    margin-top: 100px;
+    padding-left: 20px;
+    background-color: white;
+  }
+
+  span {
+    display: block;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .nav-header {
+    span {
+      margin-bottom: 10px;
+      font-family: serif;
+
+      &:not(.header-copy) {
+        padding-left: 10px;
+      }
+    }
+
+    .header-copy {
+      font-size: 30px;
+      letter-spacing: -2px;
+    }
+  }
+
+  .nav-main {
+    margin: 25px 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    .main-new {
+      margin: 20px 0;
+
+      span {
+        margin: 5px 0;
+        font-size: 17px;
+
+        &:last-child {
+          color: red;
+        }
+      }
+    }
+
+    .main-menus {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .main-sub-menus {
+      margin: 12px 0px 12px 12px;
+      font-size: 14px;
+      color: gray;
+    }
+  }
+
+  .nav-footer {
+    margin: 30px 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    .footer-menus {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .footer-stories {
+      margin: 20px 0;
+      font-size: 20px;
+    }
+  }
+}
+
+.nav-transformer {
+  transform: translateX(0px);
+}
