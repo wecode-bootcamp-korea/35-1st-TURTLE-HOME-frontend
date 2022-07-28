@@ -30,7 +30,7 @@ const NavMenuComponent = ({
                 key={i}
                 className="main-sub-menus"
                 onClick={() => {
-                  navigateToMenu(i, './sub');
+                  navigateToMenu(i, './products');
                 }}
               >
                 {subElement}

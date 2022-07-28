@@ -1,4 +1,4 @@
-const BASE_URL = 'http://10.58.3.26:8000';
+const BASE_URL = 'http://10.58.7.3:8000';
 
 const API = {
   categories: `${BASE_URL}/categories`,

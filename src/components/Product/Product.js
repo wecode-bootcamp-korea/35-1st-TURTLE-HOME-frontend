@@ -2,25 +2,34 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Product.scss';
 
-const Product = ({ id, url, name, prices }) => {
+const Product = ({
+  id,
+  productClassName,
+  image_url,
+  name,
+  min_price,
+  max_price,
+}) => {
   const navigate = useNavigate();
   const goToProductDetail = () => {
     navigate(`/products/${id}`);
   };
 
+  const min = Math.ceil(min_price);
+  const max = Math.ceil(max_price);
+
   return (
-    <li className="search-product-item">
+    <li className={productClassName}>
       <div className="product-img" onClick={goToProductDetail}>
-        <img src={url} alt={name} />
+        <img src={image_url} alt={name} />
       </div>
       <div className="product-info">
         <h2>{name}</h2>
-        {prices.length === 1 ? (
-          <div>{prices[0].toLocaleString('ko-KR')} 원</div>
+        {min_price === max_price ? (
+          <div>{min.toLocaleString('ko-KR')} 원</div>
         ) : (
           <div>
-            {prices[0].toLocaleString('ko-KR')} 원 -{' '}
-            {prices[prices.length - 1].toLocaleString('ko-KR')} 원
+            {min.toLocaleString('ko-KR')} 원 - {max.toLocaleString('ko-KR')} 원
           </div>
         )}
       </div>

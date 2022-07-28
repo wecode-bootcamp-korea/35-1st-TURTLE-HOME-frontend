@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import SearchResult from '../../components/SearchResult/SearchResult';
 import ProductList from '../../components/ProductList/ProductList';
+import { API } from '../../components/Config/Config';
 import './Search.scss';
 
 const Search = () => {
@@ -11,9 +12,9 @@ const Search = () => {
   const searchWord = useRef('');
 
   useEffect(() => {
-    fetch('/data/mock.json')
+    fetch(`${API.products}`)
       .then(res => res.json())
-      .then(data => setProducts(data));
+      .then(data => setProducts(data.result));
   }, []);
 
   const handleChange = e => {
@@ -47,7 +48,10 @@ const Search = () => {
       {filteringProducts.length === 0 ? (
         <SearchResult searchWord={searchWord.current} />
       ) : (
-        <ProductList products={filteringProducts} />
+        <ProductList
+          products={filteringProducts}
+          productClassName="search-product-list"
+        />
       )}
     </main>
   );
