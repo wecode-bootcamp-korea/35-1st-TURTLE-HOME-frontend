@@ -7,6 +7,7 @@ import Intro from './pages/Intro/Intro';
 import Search from './pages/Search/Search';
 import MainCategory from './pages/MainCategory/MainCategory';
 import SubCategory from './pages/SubCategory/SubCategory';
+import Cart from './pages/Cart/Cart';
 import Footer from './components/Footer/Footer';
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/search" element={<Search />} />
         <Route path="/maincategory" element={<MainCategory />} />
         <Route path="/products" element={<SubCategory />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>

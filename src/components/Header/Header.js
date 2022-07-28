@@ -45,7 +45,7 @@ const Header = () => {
             <div className="page-link">
               <FontAwesomeIcon icon={faBagShopping} className="icon" />
               <Link to="/cart">
-                <span className="text">장바구니&nbsp;&nbsp;(0)</span>
+                <span className="text">장바구니</span>
               </Link>
             </div>
           </div>
