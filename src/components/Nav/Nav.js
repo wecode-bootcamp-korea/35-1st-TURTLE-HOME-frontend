@@ -69,7 +69,7 @@ const Nav = () => {
       </div>
 
       <i
-        class="fa-solid fa-bars"
+        className="fa-solid fa-bars"
         onMouseOver={() => {
           setNavSlide(true);
         }}

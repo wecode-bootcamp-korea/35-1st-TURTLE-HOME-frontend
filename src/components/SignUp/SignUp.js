@@ -74,7 +74,7 @@ const SignUp = ({ handleLoginModal, handleSignUpModal }) => {
                 handleSignUpModal();
               }}
             >
-              <i class="fa-solid fa-angle-left"></i>
+              <i className="fa-solid fa-angle-left"></i>
             </div>
             <span className="section-header">자라홈 계정 만들기</span>
             <span> </span>

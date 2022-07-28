@@ -84,8 +84,8 @@ const Login = ({ handleLoginModal, handleSignUpModal }) => {
           <div className="login-footer">
             <div className="hr-line">또는</div>
             <div className="login-icon">
-              <i class="fa-brands fa-facebook"></i>
-              <i class="fa-brands fa-apple"></i>
+              <i className="fa-brands fa-facebook"></i>
+              <i className="fa-brands fa-apple"></i>
             </div>
             <span className="personal-agreement">
               개인 정보 정책에 따라 계정과 연동하는 것에 동의합니다.
