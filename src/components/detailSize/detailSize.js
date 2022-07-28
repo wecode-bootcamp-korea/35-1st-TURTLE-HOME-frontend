@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import './DetailSize.scss';
+import './detailSize.scss';
 
 const DetailSize = ({
   index,
@@ -9,7 +9,6 @@ const DetailSize = ({
   setSelectedComponentNumber,
   setTotalPrice,
   setTotalNumber,
-  addCommaToPrice,
   elementSizeId,
   setSizeId,
 }) => {
@@ -54,7 +53,7 @@ const DetailSize = ({
         className={`
       ${selectedComponentNumber === index ? 'display' : 'size-price'}`}
       >
-        {addCommaToPrice(orderNumber.current * price)} 원
+        {(orderNumber.current * price).toLocaleString()} 원
       </span>
       <div
         className={`
