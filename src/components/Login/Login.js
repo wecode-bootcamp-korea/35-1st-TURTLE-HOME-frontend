@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import UserInput from '../../components/UserInput/UserInput';
+import { API } from '../Config/Config';
+import UserInput from '../UserInput/UserInput';
+
 import './Login.scss';
 
-const Login = () => {
+const Login = ({ handleLoginModal, handleSignUpModal }) => {
   const [loginInput, setLoginInput] = useState({
     email: '',
     password: '',
@@ -20,7 +21,7 @@ const Login = () => {
 
   const loginFetch = e => {
     e.preventDefault();
-    fetch('http://10.58.7.224:8000/users/signin', {
+    fetch(`${API.login}`, {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -28,12 +29,29 @@ const Login = () => {
       }),
     })
       .then(res => res.json())
-      .then(data => localStorage.setItem('token', data.access_token));
+      .then(data => {
+        localStorage.setItem('token', data.access_token);
+        loginSuccess();
+      });
+  };
+
+  const loginSuccess = () => {
+    if (localStorage.getItem('token')) {
+      handleLoginModal();
+      alert('로그인 성공 !');
+    } else {
+      alert('로그인 실패 🥲');
+    }
   };
 
   return (
-    <div className="login">
-      <div className="container">
+    <div className="login" onClick={handleLoginModal}>
+      <div
+        className="container"
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
         <div className="section-left">
           <div className="login-header">
             <span className="left-section-header">로그인</span>
@@ -76,11 +94,13 @@ const Login = () => {
         </div>
         <div className="section-right">
           <span className="right-section-header">회원 가입</span>
-          <Link to="/signup" className="login-signin-link">
-            <button className="login-signin">계정 만들기</button>
-          </Link>
+          <div onClick={handleSignUpModal} className="login-signin-link">
+            <button className="login-signin" onClick={handleLoginModal}>
+              계정 만들기
+            </button>
+          </div>
         </div>
-        <i class="fa-solid fa-x"></i>
+        <i className="fa-solid fa-x" onClick={handleLoginModal}></i>
       </div>
     </div>
   );
