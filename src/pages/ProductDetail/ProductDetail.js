@@ -53,7 +53,7 @@ const ProductDetail = () => {
       alert('장바구니에 성공적으로 담겼습니다!');
       navigate('/cart');
     } else {
-      alert('실패..');
+      alert('로그인 해 주세요!');
     }
   };
 

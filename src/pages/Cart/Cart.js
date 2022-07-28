@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartProductList from '../../components/CartProductList/CartProductList';
 import { API } from '../../components/Config/Config';
 import './Cart.scss';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   const successOrder = () => {
     if (products.length !== 0) {
       alert('주문완료 !');
+      navigate('/');
     } else {
       alert('상품이 없습니다.');
     }
