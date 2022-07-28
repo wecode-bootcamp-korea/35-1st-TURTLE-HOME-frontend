@@ -2,28 +2,23 @@ import React from 'react';
 import Product from '../Product/Product';
 import './ProductList.scss';
 
-const ProductList = ({ products, className }) => {
-  const productClassName = () => {
-    if (className === 'product-list') {
-      return 'product-item';
-    } else if (className === 'search-product-list') {
-      return 'search-product-item';
-    } else if (className === 'cart-product-list') {
-      return 'cart-product-item';
-    }
-  };
-
+const ProductList = ({ products, productClassName }) => {
   return (
-    <ul className={className}>
-      {products.map(({ id, image_url, name, prices }) => (
+    <ul className={productClassName}>
+      {products.map(({ id, image_url, name, min_price, max_price }) => (
         <Product
           key={id}
           id={id}
-          productClassName={productClassName()}
+          productClassName={
+            productClassName === 'product-list'
+              ? 'product-item'
+              : 'search-product-item'
+          }
           image_url={image_url}
           alt={name}
           name={name}
-          prices={prices}
+          min_price={min_price}
+          max_price={max_price}
         />
       ))}
     </ul>

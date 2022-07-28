@@ -17,7 +17,7 @@ const NavMenuComponent = ({
         className="main-menus"
         onClick={() => {
           setSubMenuOpenKey(index);
-          navigateToMenu(index, './main');
+          navigateToMenu(index, './maincategory');
         }}
       >
         {element.name}
@@ -30,7 +30,7 @@ const NavMenuComponent = ({
                 key={i}
                 className="main-sub-menus"
                 onClick={() => {
-                  navigateToMenu(i, './sub');
+                  navigateToMenu(i, './products');
                 }}
               >
                 {subElement}
