@@ -2,11 +2,14 @@
 @import '../../styles/variables.scss';
 
 .signUp {
+  position: absolute;
   @include flexContainer(center, center);
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  width: 105%;
+  height: 116.5%;
+  background-color: rgba(0, 0, 0, 0.3);
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
+  z-index: 20;
 
   .container {
     position: relative;

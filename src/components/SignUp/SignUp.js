@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import UserInput from '../../components/UserInput/UserInput';
+import { API } from '../Config/Config';
 import USERINPUT_DATA from './data/userInputData';
 import CHECKBOX_DATA from './data/checkboxData';
 import './SignUp.scss';
 
-const SignUp = () => {
+const SignUp = ({ handleLoginModal, handleSignUpModal }) => {
   const [signUpInput, setSignUpInput] = useState({
     korean_name: '',
     email: '',
@@ -33,24 +33,49 @@ const SignUp = () => {
 
   const signFetch = e => {
     e.preventDefault();
-    fetch('http://10.58.2.101:8000/users/signup', {
+    fetch(`${API.signUp}`, {
       method: 'POST',
       body: JSON.stringify({
-        signUpInput,
+        korean_name: korean_name,
+        email: email,
+        password: password,
+        address: address,
+        phone_number: phone_number,
       }),
     })
       .then(res => res.json())
-      .then(result => console.log('결과:', result));
+      .then(result => signUpSuccess(result.message));
+  };
+
+  //console.log('결과:', result)
+
+  const signUpSuccess = result => {
+    if (result === 'SUCCESS') {
+      handleSignUpModal();
+      alert('회원가입 성공 ! 로그인을 해주세요');
+    } else {
+      alert('회원가입 실패 🥲');
+    }
   };
 
   return (
-    <div className="signUp">
-      <div className="container">
+    <div className="signUp" onClick={handleSignUpModal}>
+      <div
+        className="container"
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
         <div className="section">
           <div className="sign-header">
-            <Link to="/login">
+            <div
+              onClick={() => {
+                handleLoginModal();
+                handleSignUpModal();
+              }}
+            >
               <i class="fa-solid fa-angle-left"></i>
-            </Link>
+            </div>
             <span className="section-header">자라홈 계정 만들기</span>
             <span> </span>
           </div>
@@ -86,7 +111,7 @@ const SignUp = () => {
             <button>계정만들기</button>
           </form>
         </div>
-        <i class="fa-solid fa-x signup-x"></i>
+        <i className="fa-solid fa-x signup-x" onClick={handleSignUpModal}></i>
       </div>
     </div>
   );

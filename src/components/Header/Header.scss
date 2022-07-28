@@ -8,20 +8,15 @@
   height: 100px;
   padding: 10px 15px 0 20px;
   font-family: Arial, ZH-Sans, 'Lucida Sans Unicode', sans-serif, 'icomoon';
-  z-index: 1000;
+  z-index: 50;
 
   .left-container {
     @include flexContainer(center, center);
-
-    .ham-menu {
-      margin-right: 25px;
-      font-size: 26px;
-      cursor: pointer;
-    }
+    padding-left: 38px;
 
     h1 {
       font-size: 32px;
-      letter-spacing: 10px;
+      letter-spacing: 6px;
     }
   }
 
@@ -43,6 +38,13 @@
   }
 
   .right-container {
+    display: flex;
+    cursor: pointer;
+
+    .display-none {
+      display: none;
+    }
+
     .page-link {
       margin-right: 15px;
 
