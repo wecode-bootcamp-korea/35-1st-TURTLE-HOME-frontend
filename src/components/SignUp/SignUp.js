@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import UserInput from '../../components/UserInput/UserInput';
+import { API } from '../Config/Config';
 import USERINPUT_DATA from './data/userInputData';
 import CHECKBOX_DATA from './data/checkboxData';
 import './SignUp.scss';
@@ -32,14 +33,29 @@ const SignUp = ({ handleLoginModal, handleSignUpModal }) => {
 
   const signFetch = e => {
     e.preventDefault();
-    fetch('http://10.58.2.101:8000/users/signup', {
+    fetch(`${API.signUp}`, {
       method: 'POST',
       body: JSON.stringify({
-        signUpInput,
+        korean_name: korean_name,
+        email: email,
+        password: password,
+        address: address,
+        phone_number: phone_number,
       }),
     })
       .then(res => res.json())
-      .then(result => console.log('결과:', result));
+      .then(result => signUpSuccess(result.message));
+  };
+
+  //console.log('결과:', result)
+
+  const signUpSuccess = result => {
+    if (result === 'SUCCESS') {
+      handleSignUpModal();
+      alert('회원가입 성공 ! 로그인을 해주세요');
+    } else {
+      alert('회원가입 실패 🥲');
+    }
   };
 
   return (

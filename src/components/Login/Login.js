@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { API } from '../Config/Config';
 import UserInput from '../UserInput/UserInput';
+
 import './Login.scss';
 
 const Login = ({ handleLoginModal, handleSignUpModal }) => {
@@ -19,7 +21,7 @@ const Login = ({ handleLoginModal, handleSignUpModal }) => {
 
   const loginFetch = e => {
     e.preventDefault();
-    fetch('http://10.58.2.101:8000/users/signin', {
+    fetch(`${API.login}`, {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -27,7 +29,19 @@ const Login = ({ handleLoginModal, handleSignUpModal }) => {
       }),
     })
       .then(res => res.json())
-      .then(data => console.log(data.access_token));
+      .then(data => {
+        localStorage.setItem('token', data.access_token);
+        loginSuccess();
+      });
+  };
+
+  const loginSuccess = () => {
+    if (localStorage.getItem('token')) {
+      handleLoginModal();
+      alert('로그인 성공 !');
+    } else {
+      alert('로그인 실패 🥲');
+    }
   };
 
   return (
