@@ -9,16 +9,6 @@ const Cart = () => {
   const [products, setProducts] = useState([]);
   const [totalProductPrice, setTotalProductPrice] = useState(0);
 
-  // useEffect(() => {
-  //   fetch('/data/cartMock.json', {
-  //     headers: {
-  //       Authorization: localStorage.getItem('token'),
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => setProducts(result));
-  // }, []);
-
   useEffect(() => {
     fetch(`${API.carts}`, {
       headers: {
