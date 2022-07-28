@@ -51,13 +51,15 @@ const DetailSize = ({
       </div>
       <span
         className={`
-      ${selectedComponentNumber === index ? 'display' : 'size-price'}`}
+      ${selectedComponentNumber === index ? 'display-none' : 'size-price'}`}
       >
         {(orderNumber.current * price).toLocaleString()} 원
       </span>
       <div
         className={`
-        ${selectedComponentNumber === index ? 'size-quantity' : 'display'}`}
+        ${
+          selectedComponentNumber === index ? 'size-quantity' : 'display-none'
+        }`}
       >
         <span onClick={orderNumberMinus}>
           <i className="fa-solid fa-minus"></i>

@@ -17,7 +17,7 @@ const NavMenuComponent = ({
         className="main-menus"
         onClick={() => {
           setSubMenuOpenKey(index);
-          navigateToMenu(index, './main');
+          navigateToMenu(index, './maincategory');
         }}
       >
         {element.name}

@@ -31,7 +31,7 @@ const ProductDetail = () => {
   const cartToken = localStorage.getItem('token');
 
   const cartFetch = () => {
-    fetch(`http://10.58.7.224:8000/carts`, {
+    fetch(`${API.cart}`, {
       method: 'POST',
       headers: {
         Authorization: cartToken,
@@ -43,7 +43,17 @@ const ProductDetail = () => {
       }),
     })
       .then(response => response.json())
-      .then(result => console.log('결과: ', result));
+      .then(result => {
+        cartSuccess(result);
+      });
+  };
+
+  const cartSuccess = result => {
+    if (result.message === 'SUCCESS') {
+      alert('장바구니에 성공적으로 담겼습니다!');
+    } else {
+      alert('실패..');
+    }
   };
 
   if (description) {
