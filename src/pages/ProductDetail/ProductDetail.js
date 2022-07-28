@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { API } from '../../components/Config/Config';
 import DetailSize from '../../components/detailSize/detailSize';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const [data, setData] = useState({});
-
+  const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const ProductDetail = () => {
   const cartToken = localStorage.getItem('token');
 
   const cartFetch = () => {
-    fetch(`${API.cart}`, {
+    fetch(`${API.carts}`, {
       method: 'POST',
       headers: {
         Authorization: cartToken,
@@ -51,6 +51,7 @@ const ProductDetail = () => {
   const cartSuccess = result => {
     if (result.message === 'SUCCESS') {
       alert('장바구니에 성공적으로 담겼습니다!');
+      navigate('/cart');
     } else {
       alert('실패..');
     }

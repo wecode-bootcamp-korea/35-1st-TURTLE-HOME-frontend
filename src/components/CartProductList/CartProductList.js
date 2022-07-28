@@ -13,7 +13,14 @@ const CartProductList = ({
   return (
     <ul className={className}>
       {products.map(
-        ({ cart_id, product_image, product_name, product_price, quantity }) => (
+        ({
+          cart_id,
+          product_image,
+          product_name,
+          product_price,
+          product_number,
+          quantity,
+        }) => (
           <CartProduct
             key={cart_id}
             id={cart_id}
@@ -22,6 +29,7 @@ const CartProductList = ({
             alt={product_name}
             name={product_name}
             price={product_price}
+            productNumber={product_number}
             quantity={quantity}
             setProducts={setProducts}
             deleteProduct={deleteProduct}

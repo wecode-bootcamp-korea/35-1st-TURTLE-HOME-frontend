@@ -56,9 +56,8 @@
       color: gray;
     }
   }
-  .product-detail {
-    display: flex;
-    justify-content: space-between;
+  .cart-product-detail {
+    @include flexContainer(space-between, space-between);
 
     .product-count {
       display: flex;

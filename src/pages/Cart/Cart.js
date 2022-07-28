@@ -6,6 +6,14 @@ import './Cart.scss';
 const Cart = () => {
   const [products, setProducts] = useState([]);
 
+  const successOrder = () => {
+    if (products.length !== 0) {
+      alert('주문완료 !');
+    } else {
+      alert('상품이 없습니다.');
+    }
+  };
+
   useEffect(() => {
     fetch(API.carts, {
       headers: {
@@ -100,6 +108,7 @@ const Cart = () => {
             orderNumberPlus={orderNumberPlus}
           />
         </div>
+        {console.log(products)}
         <div className="right-section">
           <div className="cart-right-title">제품</div>
           <hr></hr>
@@ -116,12 +125,7 @@ const Cart = () => {
           <div className="cart-promotion-span">
             프로모션 코드가 있으신가요? 나중에 결제 페이지에서 입력하십시오.
           </div>
-          <button
-            className="cart-order"
-            onClick={() => {
-              alert('주문완료 !');
-            }}
-          >
+          <button className="cart-order" onClick={successOrder}>
             주문하기
           </button>
         </div>

@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import './CartProduct.scss';
 
 const CartProduct = ({
@@ -7,30 +6,25 @@ const CartProduct = ({
   image_url,
   name,
   price,
+  productNumber,
   quantity,
   deleteProduct,
   orderNumberMinus,
   orderNumberPlus,
 }) => {
-  const navigate = useNavigate();
-
-  const goToProductDetail = () => {
-    navigate(`/products/${id}`);
-  };
-
   return (
     <li className={productClassName}>
       <div className="product-img">
-        <img src={image_url} alt={name} onClick={goToProductDetail} />
+        <img src={image_url} alt={name} />
         <div className="delete" onClick={() => deleteProduct(id)}>
           <i className="fa-solid fa-xmark"></i>
         </div>
       </div>
-      <div className="product-detail">
+      <div className="cart-product-detail">
         <div className="product-info">
           <h2>{name}</h2>
           <div>{price.toLocaleString('ko-KR')} 원</div>
-          <div className="product-id">제품번호 : {id}</div>
+          <div className="product-id">제품번호 : {productNumber}</div>
         </div>
         <div className="product-count">
           <span onClick={orderNumberMinus}>
