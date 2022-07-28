@@ -8,6 +8,7 @@ import Search from './pages/Search/Search';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import MainCategory from './pages/MainCategory/MainCategory';
 import SubCategory from './pages/SubCategory/SubCategory';
+import Cart from './pages/Cart/Cart';
 import Footer from './components/Footer/Footer';
 
 const Router = () => {
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/detail/:id" element={<ProductDetail />} />
         <Route path="/maincategory" element={<MainCategory />} />
         <Route path="/products" element={<SubCategory />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>

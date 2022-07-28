@@ -5,7 +5,7 @@ const API = {
   products: `${BASE_URL}/products`,
   signUp: `${BASE_URL}/users/signup`,
   login: `${BASE_URL}/users/signin`,
-  cart: `${BASE_URL}/carts`,
+  carts: `${BASE_URL}/carts`,
 };
 
 export { API };
