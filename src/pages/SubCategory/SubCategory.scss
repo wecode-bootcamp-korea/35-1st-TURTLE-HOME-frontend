@@ -2,6 +2,7 @@
 @import '../../styles/variables.scss';
 
 .products {
+  min-height: 700px;
   padding-top: 130px;
 
   .side {
@@ -23,6 +24,8 @@
   }
 
   .filter-modal {
+    position: relative;
+
     .filter-backdrop {
       position: fixed;
       top: 0;
@@ -30,22 +33,22 @@
       left: 0;
       right: 0;
       background: rgba(0, 0, 0, 0.239);
-      z-index: 2000;
+      z-index: 200;
     }
 
     .open {
       transform: translateX(-100%);
-      transition: all ease 0.8s;
     }
 
     .filter-container {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 100%;
       width: 320px;
       height: 100vh;
       background: white;
-      z-index: 5000;
+      transition: all ease 0.5s;
+      z-index: 300;
 
       .filter-header {
         @include flexContainer(center, space-between);

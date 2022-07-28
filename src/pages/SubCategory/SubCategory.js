@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
+import NoProduct from './NoProduct';
 import { API } from '../../components/Config/Config';
 import './SubCategory.scss';
 
@@ -40,10 +41,15 @@ const SubCategory = () => {
 
   const navigate = useNavigate();
 
+  const handleModal = () => {
+    setModalOpen(modalOpen => !modalOpen);
+  };
+
   const applyFilter = () => {
     navigate(
       `/products?${sort_by}${inputValue.sort_by}${min_price}${max_price}${size}${inputValue.size}`
     );
+    handleModal();
   };
 
   const optionReset = () => {
@@ -51,124 +57,120 @@ const SubCategory = () => {
     navigate(`/products`);
   };
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
   return (
     <section className="products">
       <div className="side">
         <div>{products.length}&nbsp;제품</div>
         <div>|</div>
-        <div className="filter-button" onClick={openModal}>
+        <div className="filter-button" onClick={handleModal}>
           필터
         </div>
       </div>
       <div className="filter-modal">
-        <div className={modalOpen && 'filter-backdrop'}>
-          <div
-            className={'filter-container' + (modalOpen === true ? ' open' : '')}
-          >
-            <div className="filter-header">
-              <h2>필터</h2>
-              <img
-                src="/images/x_thin.png"
-                alt="close button"
-                onClick={closeModal}
-              />
-            </div>
-            <div className="filter-list">
-              <ul>
-                <li className="order">
-                  <div className="filter-tab">
-                    <span>종류</span>
-                    <span>
-                      <img src="/images/minus.png" alt="minus" />
-                    </span>
-                  </div>
-                  <div className="options">
-                    {ORDER_FILTER_LIST.map(list => {
-                      return (
-                        <div className="option" key={list.id}>
-                          <input
-                            type="radio"
-                            name="sort_by"
-                            value={list.value}
-                            onChange={handleChange}
-                          />
-                          <label>{list.title}</label>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </li>
-                <li className="price">
-                  <div className="filter-tab">
-                    <span>가격</span>
-                    <span>
-                      <img src="/images/minus.png" alt="minus" />
-                    </span>
-                  </div>
-                  <div className="options">
-                    {PRICE_FILTER_LIST.map(list => {
-                      return (
-                        <div className="option" key={list.id}>
-                          <input
-                            type="radio"
-                            name="rangeId"
-                            value={list.id}
-                            onChange={handleChange}
-                          />
-                          <label>{list.title}</label>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </li>
-                <li className="size">
-                  <div className="filter-tab">
-                    <span>사이즈</span>
-                    <span>
-                      <img src="/images/minus.png" alt="minus" />
-                    </span>
-                  </div>
-                  <div className="options">
-                    {SIZE_FILTER_LIST.map(list => {
-                      return (
-                        <div className="option" key={list.id}>
-                          <input
-                            type="radio"
-                            name="size"
-                            value={list.value}
-                            onChange={handleChange}
-                          />
-                          <label>{list.title}</label>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </li>
-              </ul>
-              <div className="filter-footer">
-                <input
-                  type="reset"
-                  className="footer-box"
-                  value="초기화"
-                  onClick={optionReset}
-                ></input>
-                <div className="footer-box" onClick={applyFilter}>
-                  적용
+        <div
+          className={modalOpen && 'filter-backdrop'}
+          onClick={handleModal}
+        ></div>
+        <div className={'filter-container' + (modalOpen ? ' open' : '')}>
+          <div className="filter-header">
+            <h2>필터</h2>
+            <img
+              src="/images/x_thin.png"
+              alt="close button"
+              onClick={handleModal}
+            />
+          </div>
+          <form className="filter-list">
+            <ul>
+              <li className="order">
+                <div className="filter-tab">
+                  <span>종류</span>
+                  <span>
+                    <img src="/images/minus.png" alt="minus" />
+                  </span>
                 </div>
+                <div className="options">
+                  {ORDER_FILTER_LIST.map(list => {
+                    return (
+                      <div className="option" key={list.id}>
+                        <input
+                          type="radio"
+                          name="sort_by"
+                          value={list.value}
+                          onChange={handleChange}
+                        />
+                        <label>{list.title}</label>
+                      </div>
+                    );
+                  })}
+                </div>
+              </li>
+              <li className="price">
+                <div className="filter-tab">
+                  <span>가격</span>
+                  <span>
+                    <img src="/images/minus.png" alt="minus" />
+                  </span>
+                </div>
+                <div className="options">
+                  {PRICE_FILTER_LIST.map(list => {
+                    return (
+                      <div className="option" key={list.id}>
+                        <input
+                          type="radio"
+                          name="rangeId"
+                          value={list.id}
+                          onChange={handleChange}
+                        />
+                        <label>{list.title}</label>
+                      </div>
+                    );
+                  })}
+                </div>
+              </li>
+              <li className="size">
+                <div className="filter-tab">
+                  <span>사이즈</span>
+                  <span>
+                    <img src="/images/minus.png" alt="minus" />
+                  </span>
+                </div>
+                <div className="options">
+                  {SIZE_FILTER_LIST.map(list => {
+                    return (
+                      <div className="option" key={list.id}>
+                        <input
+                          type="radio"
+                          name="size"
+                          value={list.value}
+                          onChange={handleChange}
+                        />
+                        <label>{list.title}</label>
+                      </div>
+                    );
+                  })}
+                </div>
+              </li>
+            </ul>
+            <div className="filter-footer">
+              <input
+                type="reset"
+                className="footer-box"
+                value="초기화"
+                onClick={optionReset}
+              ></input>
+              <div className="footer-box" onClick={applyFilter}>
+                적용
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-      <ProductList products={products} productClassName="product-list" />
+      {products.length !== 0 ? (
+        <ProductList products={products} productClassName="product-list" />
+      ) : (
+        <NoProduct />
+      )}
     </section>
   );
 };
