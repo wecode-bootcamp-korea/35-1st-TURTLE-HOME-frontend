@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API } from '../Config/Config';
 import './CartProduct.scss';
 
 const CartProduct = ({
@@ -10,58 +8,14 @@ const CartProduct = ({
   name,
   price,
   quantity,
-  setProducts,
   deleteProduct,
-  setTotalProductPrice,
+  orderNumberMinus,
+  orderNumberPlus,
 }) => {
   const navigate = useNavigate();
 
-  const newNumber = useRef(quantity);
-
-  const [realNumber, setRealNumber] = useState(quantity);
-
-  const cartNumberFetch = () => {
-    fetch(`${API.carts}/${id}`, {
-      method: 'PATCH',
-      headers: {
-        Authorization: localStorage.getItem('token'),
-      },
-      body: JSON.stringify({ quantity: newNumber.current }),
-    })
-      .then(response => response.json())
-      .then(result => console.log(result));
-  };
-
-  useEffect(() => {
-    totalPriceHandler();
-  }, [newNumber]);
-
   const goToProductDetail = () => {
     navigate(`/products/${id}`);
-  };
-
-  const orderNumberMinus = () => {
-    if (realNumber > 1) {
-      newNumber.current = newNumber.current - 1;
-      setRealNumber(newNumber.current);
-      setTotalProductPrice(prev => prev - realNumber * price);
-      cartNumberFetch();
-    } else {
-      return;
-    }
-  };
-
-  const orderNumberPlus = () => {
-    newNumber.current = newNumber.current + 1;
-    setRealNumber(newNumber.current);
-    setTotalProductPrice(prev => prev + realNumber * price);
-    cartNumberFetch();
-  };
-
-  console.log('real', realNumber);
-
-  const totalPriceHandler = () => {
-    setTotalProductPrice(prev => prev + realNumber * price);
   };
 
   return (
@@ -82,7 +36,7 @@ const CartProduct = ({
           <span onClick={orderNumberMinus}>
             <i className="fa-solid fa-minus"></i>
           </span>
-          <div className="orderNumberCount">{newNumber.current}</div>
+          <div className="orderNumberCount">{quantity}</div>
           <span onClick={orderNumberPlus}>
             <i className="fa-solid fa-plus"></i>
           </span>

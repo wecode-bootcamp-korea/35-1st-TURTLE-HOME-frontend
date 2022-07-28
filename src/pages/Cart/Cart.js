@@ -3,14 +3,11 @@ import CartProductList from '../../components/CartProductList/CartProductList';
 import { API } from '../../components/Config/Config';
 import './Cart.scss';
 
-//상품별 상품으로 갈 수 있는 링크 부여.
-
 const Cart = () => {
   const [products, setProducts] = useState([]);
-  const [totalProductPrice, setTotalProductPrice] = useState(0);
 
   useEffect(() => {
-    fetch(`${API.carts}`, {
+    fetch(API.carts, {
       headers: {
         Authorization: localStorage.getItem('token'),
       },
@@ -19,13 +16,71 @@ const Cart = () => {
       .then(result => setProducts(result.results));
   }, []);
 
+  const totalPrice = products.reduce(
+    (acc, { product_price, quantity }) => acc + product_price * quantity,
+    0
+  );
+
   const deleteProduct = id => {
     fetch(`${API.carts}/${id}`, {
       method: 'DELETE',
       headers: { Authorization: localStorage.getItem('token') },
-    }).then(res => res.json());
+    }).then(res => {
+      if (res.status === 204) {
+        alert('상품이 장바구니에서 삭제되었습니다 🐢');
+        setProducts(products.filter(product => product.cart_id !== id));
+      } else {
+        alert('다시 시도해 주세요 🥲');
+      }
+    });
+  };
 
-    setProducts(products.filter(product => product.cart_id !== id));
+  const orderNumberMinus = id => {
+    const selectedIdx = products.findIndex(product => product.cart_id === id);
+    if (products[selectedIdx].quantity > 1) {
+      const newProducts = [...products];
+      newProducts[selectedIdx].quantity--;
+
+      fetch(`${API.carts}/${id}`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify({ quantity: newProducts[selectedIdx].quantity }),
+      })
+        .then(response => response.json())
+        .then(result => {
+          if (result.message === 'SUCCESS') {
+            setProducts(newProducts);
+          } else {
+            alert('다시 시도해 주세요 🥲');
+          }
+        });
+    } else {
+      return;
+    }
+  };
+
+  const orderNumberPlus = id => {
+    const selectedIdx = products.findIndex(product => product.cart_id === id);
+    const newProducts = [...products];
+    newProducts[selectedIdx].quantity++;
+
+    fetch(`${API.carts}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ quantity: newProducts[selectedIdx].quantity }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'SUCCESS') {
+          setProducts(newProducts);
+        } else {
+          alert('다시 시도해 주세요 🥲');
+        }
+      });
   };
 
   return (
@@ -41,7 +96,8 @@ const Cart = () => {
             className="cart-product-list"
             setProducts={setProducts}
             deleteProduct={deleteProduct}
-            setTotalProductPrice={setTotalProductPrice}
+            orderNumberMinus={orderNumberMinus}
+            orderNumberPlus={orderNumberPlus}
           />
         </div>
         <div className="right-section">
@@ -50,15 +106,11 @@ const Cart = () => {
           <div className="cart-right-total">
             <div className="cart-small-total">
               <span>총 제품 : 세금 포함</span>
-              <span>
-                {Number(totalProductPrice).toLocaleString('ko-KR')} 원
-              </span>
+              <span>{totalPrice.toLocaleString('ko-KR')} 원</span>
             </div>
             <div className="cart-big-total">
               <span>합계 :</span>
-              <span>
-                {Number(totalProductPrice).toLocaleString('ko-KR')}* 원
-              </span>
+              <span>{totalPrice.toLocaleString('ko-KR')}* 원</span>
             </div>
           </div>
           <div className="cart-promotion-span">

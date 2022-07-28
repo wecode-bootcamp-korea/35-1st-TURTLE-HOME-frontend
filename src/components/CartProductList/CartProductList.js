@@ -7,7 +7,8 @@ const CartProductList = ({
   className,
   setProducts,
   deleteProduct,
-  setTotalProductPrice,
+  orderNumberMinus,
+  orderNumberPlus,
 }) => {
   return (
     <ul className={className}>
@@ -24,7 +25,8 @@ const CartProductList = ({
             quantity={quantity}
             setProducts={setProducts}
             deleteProduct={deleteProduct}
-            setTotalProductPrice={setTotalProductPrice}
+            orderNumberMinus={() => orderNumberMinus(cart_id)}
+            orderNumberPlus={() => orderNumberPlus(cart_id)}
           />
         )
       )}
