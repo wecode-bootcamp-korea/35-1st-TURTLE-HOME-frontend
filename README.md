@@ -34,7 +34,7 @@ BE - 성바울, 전은형
 
 
 - 인트로
-
+<Img src="https://user-images.githubusercontent.com/96906682/182056124-e07eb413-2797-4a1c-b714-04204bdd92f8.gif" />
 - 검색
 
 - 로그인, 회원가입
